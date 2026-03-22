@@ -6,11 +6,6 @@ Run: python app.py  →  open http://localhost:5000
 from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
-
-# ─────────────────────────────────────────────────────
-#  PORTFOLIO DATA  ← Edit everything here!
-# ─────────────────────────────────────────────────────
-
 PORTFOLIO = {
     "name":      "Your Name",
     "role":      "Frontend Developer",
