@@ -78,11 +78,6 @@ PORTFOLIO = {
         },
     ],
 }
-
-# ─────────────────────────────────────────────────────
-#  ROUTES
-# ─────────────────────────────────────────────────────
-
 @app.route("/")
 def index():
     """Main portfolio page."""
@@ -93,11 +88,5 @@ def index():
 def api_portfolio():
     """Optional JSON API — useful for headless / React frontends."""
     return jsonify(PORTFOLIO)
-
-
-# ─────────────────────────────────────────────────────
-#  ENTRY POINT
-# ─────────────────────────────────────────────────────
-
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
