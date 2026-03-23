@@ -90,3 +90,5 @@ def api_portfolio():
     return jsonify(PORTFOLIO)
 if __name__ == "__main__":
     app.run(debug=True, port=5000)
+    if PORTFOLIO["available"]:
+        print(f"🚀 {PORTFOLIO['name']} is available for hire! Contact: {PORTFOLIO['email']}")
