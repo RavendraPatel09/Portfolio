@@ -7,7 +7,7 @@ from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 PORTFOLIO = {
-    "name":      "Samarth Patel",
+    "name":      "Ravendra Patel",
     "role":      "AI Developer",
     "tagline":   "Crafting pixel-perfect interfaces at the intersection of design & engineering.",
     "available": True,
@@ -22,7 +22,7 @@ PORTFOLIO = {
     ],
 
     "about": (
-    "I  Developer focused on crafting clean, responsive, and user-friendly interfaces using React, TypeScript, and Tailwind CSS. With a strong foundation in HTML, CSS, Python, and Cpp, Im currently improving my skills in DSA, System Design, and SQL to build scalable and efficient applications"
+    "I focused on crafting clean, responsive, and user-friendly interfaces using React, TypeScript, and Tailwind CSS. With a strong foundation in HTML, CSS, Python, and Cpp, Im currently improving my skills in DSA, System Design, and SQL to build scalable and efficient applications"
     ),
 
     "highlights": [
