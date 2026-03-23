@@ -7,26 +7,22 @@ from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 PORTFOLIO = {
-    "name":      "SAMARTH SINGH",
-    "role":      "Frontend Developer",
+    "name":      "Samarth Patel",
+    "role":      "AI Developer",
     "tagline":   "Crafting pixel-perfect interfaces at the intersection of design & engineering.",
     "available": True,
-    "email":     "you@example.com",
-    "github":    "https://github.com/yourusername",
-    "linkedin":  "https://linkedin.com/in/yourusername",
+    "email":     "Patelsamerth9@gmail.com",
+    "github":    "https://github.com/RavendraPatel09",
+    "linkedin":  "https://linkedin.com/in/ravendra-patel-3bb375338",
 
     "stats": [
-        {"number": "3+",   "label": "Years Experience"},
-        {"number": "24",   "label": "Projects Shipped"},
-        {"number": "8",    "label": "Happy Clients"},
-        {"number": "100%", "label": "Passion for Craft"},
+        {"label": "Fresher"},
+        {"number": "5",   "label": "Projects Worked"},
+        {"number": "100%", "label": "Passenated to Learn"},
     ],
 
     "about": (
-        "I'm a Frontend Developer obsessed with the details most people miss — "
-        "the spacing that makes a layout breathe, the easing curve that makes an "
-        "animation feel alive. I specialise in React, TypeScript, and Tailwind CSS "
-        "with a strong eye for UI/UX using Figma."
+    "I  Developer focused on crafting clean, responsive, and user-friendly interfaces using React, TypeScript, and Tailwind CSS. With a strong foundation in HTML, CSS, Python, and Cpp, Im currently improving my skills in DSA, System Design, and SQL to build scalable and efficient applications"
     ),
 
     "highlights": [
@@ -36,35 +32,40 @@ PORTFOLIO = {
     ],
 
     "skills": [
-        {"name": "React / Next.js", "icon": "⚛️", "level": 95},
-        {"name": "TypeScript",      "icon": "🔷", "level": 90},
-        {"name": "Tailwind CSS",    "icon": "💨", "level": 95},
-        {"name": "Figma",           "icon": "🎨", "level": 85},
-        {"name": "Node.js",         "icon": "🟢", "level": 75},
+[
+{"name": "React / Next.js", "icon": "⚛️", "level": 60},
+{"name": "TypeScript",      "icon": "🔷", "level": 65},
+{"name": "Tailwind CSS",    "icon": "💨", "level": 95},
+{"name": "Figma",           "icon": "🎨", "level": 85},
+{"name": "Node.js",         "icon": "🟢", "level": 75},
+{"name": "HTML",            "icon": "🌐", "level": 95},
+{"name": "Python",          "icon": "🐍", "level": 85},
+{"name": "C++",             "icon": "⚙️", "level": 80},
+{"name": "SQL",             "icon": "🗄️", "level": 80}
+]
     ],
 
     "tools": [
         "Next.js", "Zustand", "React Query", "Framer Motion",
         "Shadcn/ui", "Prisma", "PostgreSQL", "Vercel", "Git", "REST APIs",
+        "Postgres","Figma","Cursor","Google collabe"
     ],
 
     "projects": [
         {
             "num":      "01",
-            "title":    "Luminar Dashboard",
-            "desc":     "Real-time analytics dashboard for SaaS. Handles 50k+ data points at 60fps. Multi-tenant auth, custom widget builder, and CSV export.",
-            "tags":     ["React", "TypeScript", "Tailwind", "Node.js"],
-            "link":     "#",
+            "title":    "Socialconnect",
+            "desc":     "Help in real time to connect creator and manager at one place with all the essential think kept safe.",
+            "tags":     ["React", "TypeScript", "Tailwind", "Node.js","Etc"],
             "featured": True,
             "emoji":    "📊",
         },
         {
             "num":      "02",
-            "title":    "Orbita UI Kit",
-            "desc":     "Open-source component library with 80+ production-ready components. Built with Tailwind CSS and Radix UI. 900+ GitHub stars.",
-            "tags":     ["Figma", "TypeScript", "Tailwind"],
-            "link":     "#",
-            "featured": False,
+            "title":    "Find my stuff",
+            "desc":     "Open-source website that help student find there lost things at campus with the help of student and real time monitor with the help of cammera.",
+            "tags":     ["Figma", "TypeScript", "Tailwind","Javascript","sql","html","tailwindcss"],
+            "featured": True,
             "emoji":    "🧩",
         },
         {
@@ -74,7 +75,7 @@ PORTFOLIO = {
             "tags":     ["Next.js", "React", "Node.js"],
             "link":     "#",
             "featured": False,
-            "emoji":    "📋",
+            "emoji":    "🌐",
         },
     ],
 }
