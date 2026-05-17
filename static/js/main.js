@@ -15,7 +15,6 @@ document.addEventListener('mousemove', (e) => {
   cursorRing.style.top  = ringY + 'px';
   requestAnimationFrame(animateRing);
 })();
-
 document.querySelectorAll('a, button, .skill-card, .project-card').forEach(el => {
   el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
   el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
@@ -27,9 +26,7 @@ const revealObserver = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.12 });
-
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
 const barObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
