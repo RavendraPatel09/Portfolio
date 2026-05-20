@@ -283,7 +283,7 @@ export default function Hero() {
         aria-label="Scroll to about"
       >
         <span className="text-xs font-medium tracking-widest">SCROLL</span>
-        <ChevronDown className="animate-bounceSlow h-6 w-6 text-[var(--neon)]" />
+        <ChevronDown className="h-6 w-6 animate-bounce text-[var(--neon)]" />
       </motion.button>
     </section>
   )

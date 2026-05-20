@@ -41,10 +41,8 @@ export default function App() {
     lenisRef.current = lenis
 
     lenis.on('scroll', ScrollTrigger.update)
-    const unsub = lenis.on('scroll', ({ scroll, limit }) => {
-      const p = limit ? scroll / limit : 0
-      setProgress(Math.min(1, Math.max(0, p)))
-    })
+    const onScroll = ({ progress: p }) => setProgress(typeof p === 'number' ? p : 0)
+    lenis.on('scroll', onScroll)
 
     let raf = 0
     const tick = (time) => {
@@ -57,7 +55,7 @@ export default function App() {
 
     return () => {
       cancelAnimationFrame(raf)
-      unsub()
+      lenis.off('scroll', onScroll)
       lenis.destroy()
       lenisRef.current = null
     }
@@ -76,8 +74,8 @@ export default function App() {
   return (
     <div className="grain relative min-h-screen bg-[var(--bg)] text-[var(--text)]">
       <div
-        className="scroll-progress fixed left-0 top-0 z-[10003] h-[3px] w-full origin-left bg-gradient-to-r from-[var(--neon)] to-[var(--electric)]"
-        style={{ '--progress': progress }}
+        className="pointer-events-none fixed left-0 top-0 z-[10003] h-[3px] w-full origin-left bg-gradient-to-r from-[var(--neon)] to-[var(--electric)]"
+        style={{ transform: `scaleX(${progress})` }}
       />
 
       <Loader done={loaderDone} />

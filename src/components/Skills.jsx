@@ -1,7 +1,7 @@
 import SectionReveal from './SectionReveal'
 import { skillGroups } from '../data/skills'
 
-function SkillFlipCard({ name, icon, percent, label, glow }) {
+function SkillFlipCard({ name, icon, percent, label }) {
   const showPct = percent != null
 
   return (
@@ -53,7 +53,7 @@ export default function Skills() {
                 </h3>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                   {g.items.map((it) => (
-                    <SkillFlipCard key={it.name} {...it} glow={g.glow} />
+                    <SkillFlipCard key={it.name} {...it} />
                   ))}
                 </div>
               </div>
