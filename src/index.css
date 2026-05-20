@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #0a0a0f;
+  --bg-elevated: #111118;
+  --text: #ffffff;
+  --text-muted: #a0aec0;
+  --neon: #00ff9d;
+  --electric: #00b4ff;
+  --glass: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --cursor-size: 18px;
+}
+
+html.light {
+  --bg: #f4f6fb;
+  --bg-elevated: #ffffff;
+  --text: #0a0a0f;
+  --text-muted: #4a5568;
+  --glass: rgba(0, 0, 0, 0.04);
+  --glass-border: rgba(0, 0, 0, 0.08);
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+@media (pointer: fine) {
+  body.has-custom-cursor {
+    cursor: none;
+  }
+}
+
+/* Grain overlay */
+.grain::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Glitch heading */
+.glitch {
+  position: relative;
+  animation: glitch-skew 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  clip-path: inset(0 0 0 0);
+}
+.glitch::before {
+  color: var(--electric);
+  animation: glitch-1 0.35s linear 1;
+  text-shadow: 2px 0 var(--electric);
+  transform: translate(-2px, 0);
+}
+.glitch::after {
+  color: var(--neon);
+  animation: glitch-2 0.35s linear 1;
+  text-shadow: -2px 0 var(--neon);
+  transform: translate(2px, 0);
+}
+@keyframes glitch-1 {
+  0% {
+    clip-path: inset(20% 0 60% 0);
+  }
+  20% {
+    clip-path: inset(60% 0 10% 0);
+  }
+  40% {
+    clip-path: inset(10% 0 70% 0);
+  }
+  60% {
+    clip-path: inset(40% 0 30% 0);
+  }
+  80% {
+    clip-path: inset(5% 0 85% 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 0;
+  }
+}
+@keyframes glitch-2 {
+  0% {
+    clip-path: inset(70% 0 5% 0);
+  }
+  25% {
+    clip-path: inset(15% 0 60% 0);
+  }
+  50% {
+    clip-path: inset(50% 0 20% 0);
+  }
+  75% {
+    clip-path: inset(30% 0 40% 0);
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 0;
+  }
+}
+@keyframes glitch-skew {
+  0% {
+    transform: skew(0deg);
+  }
+  20% {
+    transform: skew(-2deg);
+  }
+  40% {
+    transform: skew(1deg);
+  }
+  60% {
+    transform: skew(-1deg);
+  }
+  100% {
+    transform: skew(0deg);
+  }
+}
+
+/* Flip card */
+.flip-card {
+  perspective: 1200px;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+/* Glass panel */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.neon-glow {
+  box-shadow:
+    0 0 0 1px rgba(0, 255, 157, 0.15),
+    0 0 24px rgba(0, 255, 157, 0.12);
+}
+.neon-glow-hover:hover {
+  box-shadow:
+    0 0 0 1px rgba(0, 255, 157, 0.35),
+    0 0 40px rgba(0, 255, 157, 0.2),
+    0 0 80px rgba(0, 180, 255, 0.08);
+}
+
+/* Scroll progress */
+.scroll-progress {
+  transform-origin: left;
+  transform: scaleX(var(--progress, 0));
+}
+
+/* Typewriter caret */
+.type-caret::after {
+  content: '|';
+  margin-left: 2px;
+  color: var(--neon);
+  animation: caret-blink 1s step-end infinite;
+}
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Aurora blobs (contact) */
+@keyframes aurora-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -20px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 15px) scale(0.95);
+  }
+}
+.aurora-blob {
+  animation: aurora-float 18s ease-in-out infinite;
+}
+
+/* Selection */
+::selection {
+  background: rgba(0, 255, 157, 0.25);
+  color: var(--text);
+}
