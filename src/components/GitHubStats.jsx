@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SectionReveal from './SectionReveal'
 
 const USER = 'RavendraPatel09'
@@ -34,7 +35,13 @@ export default function GitHubStats() {
               transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
               className="glass overflow-hidden rounded-3xl border border-[var(--glass-border)] p-3"
             >
-              <img src={statsUrl} alt={`${USER} GitHub stats`} className="h-auto w-full" loading="lazy" />
+              <img
+                src={statsUrl}
+                alt={`${USER} GitHub stats`}
+                className="h-auto w-full"
+                loading="lazy"
+                onLoad={() => ScrollTrigger.refresh()}
+              />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 80 }}
@@ -43,7 +50,13 @@ export default function GitHubStats() {
               transition={{ duration: 0.75, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
               className="glass overflow-hidden rounded-3xl border border-[var(--glass-border)] p-3"
             >
-              <img src={streakUrl} alt={`${USER} GitHub streak`} className="h-auto w-full" loading="lazy" />
+              <img
+                src={streakUrl}
+                alt={`${USER} GitHub streak`}
+                className="h-auto w-full"
+                loading="lazy"
+                onLoad={() => ScrollTrigger.refresh()}
+              />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 80 }}
@@ -52,7 +65,13 @@ export default function GitHubStats() {
               transition={{ duration: 0.75, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
               className="glass overflow-hidden rounded-3xl border border-[var(--glass-border)] p-3 lg:col-span-2"
             >
-              <img src={langsUrl} alt={`${USER} top languages`} className="mx-auto h-auto w-full max-w-3xl" loading="lazy" />
+              <img
+                src={langsUrl}
+                alt={`${USER} top languages`}
+                className="mx-auto h-auto w-full max-w-3xl"
+                loading="lazy"
+                onLoad={() => ScrollTrigger.refresh()}
+              />
             </motion.div>
           </div>
         </div>

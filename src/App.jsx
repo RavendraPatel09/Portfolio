@@ -40,9 +40,11 @@ export default function App() {
     })
     lenisRef.current = lenis
 
-    lenis.on('scroll', ScrollTrigger.update)
-    const onScroll = ({ progress: p }) => setProgress(typeof p === 'number' ? p : 0)
-    lenis.on('scroll', onScroll)
+    const handleScroll = (l) => {
+      ScrollTrigger.update()
+      setProgress(typeof l.progress === 'number' ? l.progress : 0)
+    }
+    lenis.on('scroll', handleScroll)
 
     let raf = 0
     const tick = (time) => {
@@ -55,7 +57,7 @@ export default function App() {
 
     return () => {
       cancelAnimationFrame(raf)
-      lenis.off('scroll', onScroll)
+      lenis.off('scroll', handleScroll)
       lenis.destroy()
       lenisRef.current = null
     }
