@@ -32,8 +32,8 @@ function ProjectCard({ p }) {
   return (
     <motion.article
       layout
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={false}
+      whileInView={{ y: 0 }}
       viewport={{ once: true, margin: '-8%' }}
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
       style={{ rotateX: rx, rotateY: ry, transformPerspective: 900 }}

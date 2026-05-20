@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import Lenis from 'lenis'
 
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
@@ -36,35 +35,69 @@ export default function App() {
   }, [theme])
 
   useEffect(() => {
-    const t = setTimeout(() => setLoaderDone(true), 1650)
+    const t = setTimeout(() => setLoaderDone(true), 900)
     return () => clearTimeout(t)
   }, [])
 
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.15,
-      smoothWheel: true,
-      wheelMultiplier: 1,
-    })
-    lenisRef.current = lenis
-
-    const handleScroll = (l) => {
-      setProgress(typeof l.progress === 'number' ? l.progress : 0)
-    }
-    lenis.on('scroll', handleScroll)
-
+    let lenis = null
     let raf = 0
-    const tick = (time) => {
-      lenis.raf(time)
-      raf = requestAnimationFrame(tick)
+    let cancelled = false
+    let cleanupNative = null
+
+    const updateProgress = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight
+      setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0)
     }
-    raf = requestAnimationFrame(tick)
+
+    const startNativeScroll = () => {
+      updateProgress()
+      window.addEventListener('scroll', updateProgress, { passive: true })
+      return () => window.removeEventListener('scroll', updateProgress)
+    }
+
+    const init = async () => {
+      try {
+        const { default: Lenis } = await import('lenis')
+        if (cancelled) return
+
+        lenis = new Lenis({ duration: 1.1, smoothWheel: true, wheelMultiplier: 1 })
+        lenisRef.current = lenis
+
+        const handleScroll = (l) => {
+          setProgress(typeof l.progress === 'number' ? l.progress : 0)
+        }
+        lenis.on('scroll', handleScroll)
+
+        const tick = (time) => {
+          lenis.raf(time)
+          raf = requestAnimationFrame(tick)
+        }
+        raf = requestAnimationFrame(tick)
+
+        return () => {
+          lenis.off('scroll', handleScroll)
+        }
+      } catch {
+        if (!cancelled) cleanupNative = startNativeScroll()
+        return null
+      }
+    }
+
+    let cleanupLenis = null
+    init().then((fn) => {
+      cleanupLenis = fn
+    })
 
     return () => {
+      cancelled = true
       cancelAnimationFrame(raf)
-      lenis.off('scroll', handleScroll)
-      lenis.destroy()
-      lenisRef.current = null
+      cleanupLenis?.()
+      cleanupNative?.()
+      if (lenis) {
+        lenis.destroy()
+        lenisRef.current = null
+      }
     }
   }, [])
 

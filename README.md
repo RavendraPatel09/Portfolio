@@ -1,53 +1,48 @@
 # Ravendra Patel — Developer Portfolio
 
-Premium **React + Vite** portfolio with **Three.js / React Three Fiber**, **Framer Motion**, **Lenis** smooth scroll, **Tailwind CSS**, and **EmailJS** for the contact form.
+Premium **React + Vite** portfolio with **Three.js**, **Framer Motion**, **Lenis**, **Tailwind CSS**, and **EmailJS**.
 
-## Quick start
+## Run the site (important)
+
+This is **not** plain HTML. **Go Live alone on the project root will show a black screen** because the browser cannot run `/src/main.jsx` without Vite.
+
+### Option A — Development (recommended)
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open the URL Vite prints (usually `http://localhost:5173`).
+Opens **http://localhost:5173** with hot reload.
 
-### VS Code “Go Live” (Live Server)
-
-This project is **Vite + React**, not plain HTML. **Go Live** only serves static files, so it must use the **production build** in `dist/` (already configured in `.vscode/settings.json`).
-
-1. Run **`npm run build`** once (or use **Terminal → Run Build Task**, default **Ctrl+Shift+B** / **Cmd+Shift+B**).
-2. Click **Go Live** — Live Server will serve from **`dist/`** and the site should load normally.
-
-After you change source code, run **`npm run build`** again before refreshing Go Live.
-
-### VS Code Run and Debug (dev server)
-
-Use **Run → Start Debugging** and pick **“Vite: dev server”** for hot reload (same as `npm run dev`).
-
-Build:
+### Option B — Production preview (after build)
 
 ```bash
 npm run build
 npm run preview
 ```
 
+Or one command:
+
+```bash
+npm start
+```
+
+Opens **http://localhost:5501** serving the `dist/` folder correctly.
+
+### VS Code Go Live
+
+Only works **after** `npm run build`, with Live Server root set to `dist` (see `.vscode/settings.json`):
+
+1. `npm run build`
+2. Click **Go Live**
+
+Better: use **Terminal → Run Task → Dev server (hot reload)** or **Run portfolio (build + preview)**.
+
 ## EmailJS
 
-1. Copy `.env.example` to `.env`.
-2. Create a service + template at [EmailJS](https://www.emailjs.com/) that delivers to **patelsamerth9@gmail.com**.
-3. Map template variables (e.g. `from_name`, `from_email`, `message`) to match `src/components/Contact.jsx`.
+Copy `.env.example` to `.env` and add your EmailJS keys.
 
-## Resume download
+## Resume
 
-Add your PDF as `public/resume.pdf` so the **Download Resume** button works.
-
-## Stack
-
-- React 18, Vite 5  
-- `@react-three/fiber`, `@react-three/drei`, `three`  
-- `framer-motion`, `lenis`, `@emailjs/browser`, `lucide-react`  
-- Tailwind CSS  
-
----
-
-Built with care for **Ravendra Patel** ([@RavendraPatel09](https://github.com/RavendraPatel09)).
+Add `public/resume.pdf` for the Download Resume button.

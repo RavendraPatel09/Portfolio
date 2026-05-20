@@ -28,10 +28,7 @@ export default function GitHubStats() {
 
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
             <motion.div
-              initial={{ opacity: 0, y: 80 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-10%' }}
-              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+              initial={false}
               className="glass overflow-hidden rounded-3xl border border-[var(--glass-border)] p-3"
             >
               <img
@@ -42,10 +39,7 @@ export default function GitHubStats() {
               />
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, y: 80 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-10%' }}
-              transition={{ duration: 0.75, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+              initial={false}
               className="glass overflow-hidden rounded-3xl border border-[var(--glass-border)] p-3"
             >
               <img
@@ -56,10 +50,7 @@ export default function GitHubStats() {
               />
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, y: 80 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-10%' }}
-              transition={{ duration: 0.75, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
+              initial={false}
               className="glass overflow-hidden rounded-3xl border border-[var(--glass-border)] p-3 lg:col-span-2"
             >
               <img

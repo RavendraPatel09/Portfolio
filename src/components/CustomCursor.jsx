@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 const TRAIL = 12
 
 export default function CustomCursor() {
+  const [enabled, setEnabled] = useState(false)
   const dot = useRef(null)
   const ring = useRef(null)
   const trailEls = useRef([])
@@ -12,6 +13,7 @@ export default function CustomCursor() {
   useEffect(() => {
     const mq = window.matchMedia('(pointer: fine)')
     if (!mq.matches) return
+    setEnabled(true)
 
     document.body.classList.add('has-custom-cursor')
 
@@ -58,22 +60,20 @@ export default function CustomCursor() {
     }
   }, [])
 
-  if (typeof window !== 'undefined' && !window.matchMedia('(pointer: fine)').matches) {
-    return null
-  }
+  if (!enabled) return null
 
   return (
     <>
       <div
         ref={ring}
-        className="pointer-events-none fixed z-[10001] h-9 w-9 -translate-x-1/2 -translate-y-1/2 rounded-full border border-[var(--neon)]/40 mix-blend-difference transition-transform duration-150 ease-out will-change-transform"
+        className="pointer-events-none fixed z-[9990] h-9 w-9 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-[var(--neon)]/50"
         style={{ left: 0, top: 0 }}
         aria-hidden
       />
       <div
         ref={dot}
-        className="pointer-events-none fixed z-[10002] h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--neon)] shadow-[0_0_12px_var(--neon)] will-change-transform"
-        style={{ left: 0, top: 0 }}
+        className="pointer-events-none fixed z-[9991] h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--neon)]"
+        style={{ left: 0, top: 0, boxShadow: '0 0 12px var(--neon)' }}
         aria-hidden
       />
       {Array.from({ length: TRAIL }).map((_, i) => (
@@ -82,7 +82,7 @@ export default function CustomCursor() {
           ref={(el) => {
             trailEls.current[i] = el
           }}
-          className="pointer-events-none fixed z-[10000] h-1 w-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--electric)]/70 opacity-0"
+          className="pointer-events-none fixed z-[9989] h-1 w-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--electric)] opacity-0"
           aria-hidden
         />
       ))}

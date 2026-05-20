@@ -2,13 +2,23 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build portfolio (required before Go Live)",
+      "label": "Run portfolio (build + preview)",
       "type": "npm",
-      "script": "build",
+      "script": "start",
       "group": {
         "kind": "build",
         "isDefault": true
       },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Dev server (hot reload)",
+      "type": "npm",
+      "script": "dev",
       "presentation": {
         "reveal": "always",
         "panel": "shared"
