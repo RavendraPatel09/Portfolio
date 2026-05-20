@@ -42,31 +42,22 @@ export default function App() {
   useEffect(() => {
     let lenis = null
     let raf = 0
-    let cancelled = false
-    let cleanupNative = null
+    let handleScroll = null
+    let alive = true
 
-    const updateProgress = () => {
+    const updateNative = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight
       setProgress(max > 0 ? Math.min(1, window.scrollY / max) : 0)
     }
 
-    const startNativeScroll = () => {
-      updateProgress()
-      window.addEventListener('scroll', updateProgress, { passive: true })
-      return () => window.removeEventListener('scroll', updateProgress)
-    }
-
-    const init = async () => {
+    ;(async () => {
       try {
         const { default: Lenis } = await import('lenis')
-        if (cancelled) return
+        if (!alive) return
 
         lenis = new Lenis({ duration: 1.1, smoothWheel: true, wheelMultiplier: 1 })
         lenisRef.current = lenis
-
-        const handleScroll = (l) => {
-          setProgress(typeof l.progress === 'number' ? l.progress : 0)
-        }
+        handleScroll = (l) => setProgress(typeof l.progress === 'number' ? l.progress : 0)
         lenis.on('scroll', handleScroll)
 
         const tick = (time) => {
@@ -74,30 +65,20 @@ export default function App() {
           raf = requestAnimationFrame(tick)
         }
         raf = requestAnimationFrame(tick)
-
-        return () => {
-          lenis.off('scroll', handleScroll)
-        }
       } catch {
-        if (!cancelled) cleanupNative = startNativeScroll()
-        return null
+        if (!alive) return
+        updateNative()
+        window.addEventListener('scroll', updateNative, { passive: true })
       }
-    }
-
-    let cleanupLenis = null
-    init().then((fn) => {
-      cleanupLenis = fn
-    })
+    })()
 
     return () => {
-      cancelled = true
+      alive = false
       cancelAnimationFrame(raf)
-      cleanupLenis?.()
-      cleanupNative?.()
-      if (lenis) {
-        lenis.destroy()
-        lenisRef.current = null
-      }
+      window.removeEventListener('scroll', updateNative)
+      if (lenis && handleScroll) lenis.off('scroll', handleScroll)
+      lenis?.destroy()
+      lenisRef.current = null
     }
   }, [])
 
