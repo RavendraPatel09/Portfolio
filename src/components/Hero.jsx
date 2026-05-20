@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState, useEffect } from 'react'
+import { useMemo, useRef, useState, useEffect, Component, Suspense } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Float } from '@react-three/drei'
 import * as THREE from 'three'
@@ -110,6 +110,31 @@ function Scene() {
   )
 }
 
+function HeroCanvasFallback() {
+  return (
+    <div
+      className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_25%_20%,rgba(0,255,157,0.14),transparent_45%),radial-gradient(ellipse_at_75%_70%,rgba(0,180,255,0.12),transparent_40%),var(--bg)]"
+      aria-hidden
+    />
+  )
+}
+
+class R3FErrorBoundary extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { error: false }
+  }
+
+  static getDerivedStateFromError() {
+    return { error: true }
+  }
+
+  render() {
+    if (this.state.error) return <HeroCanvasFallback />
+    return this.props.children
+  }
+}
+
 function Typewriter() {
   const [line, setLine] = useState(0)
   const [text, setText] = useState('')
@@ -197,14 +222,18 @@ export default function Hero() {
       className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-[var(--bg)] pt-28"
     >
       <div className="pointer-events-none absolute inset-0 z-0 opacity-90">
-        <Canvas
-          camera={{ position: [0, 0, 10], fov: 55 }}
-          dpr={[1, 2]}
-          gl={{ alpha: true, antialias: true, powerPreference: 'high-performance' }}
-          className="h-full w-full"
-        >
-          <Scene />
-        </Canvas>
+        <R3FErrorBoundary>
+          <Suspense fallback={<HeroCanvasFallback />}>
+            <Canvas
+              camera={{ position: [0, 0, 10], fov: 55 }}
+              dpr={[1, 1.75]}
+              gl={{ alpha: true, antialias: true, powerPreference: 'default' }}
+              className="h-full w-full"
+            >
+              <Scene />
+            </Canvas>
+          </Suspense>
+        </R3FErrorBoundary>
       </div>
 
       <div
@@ -264,7 +293,7 @@ export default function Hero() {
           className="mt-10 flex flex-wrap items-center gap-4"
         >
           <MagneticCTA onClick={goProjects}>View My Work</MagneticCTA>
-          <MagneticCTA href="/resume.pdf" download>
+          <MagneticCTA href="./resume.pdf" download>
             Download Resume
           </MagneticCTA>
         </motion.div>

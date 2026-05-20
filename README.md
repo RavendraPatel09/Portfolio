@@ -1,6 +1,6 @@
 # Ravendra Patel — Developer Portfolio
 
-Premium **React + Vite** portfolio with **Three.js / React Three Fiber**, **Framer Motion**, **GSAP ScrollTrigger**, **Lenis** smooth scroll, **Tailwind CSS**, and **EmailJS** for the contact form.
+Premium **React + Vite** portfolio with **Three.js / React Three Fiber**, **Framer Motion**, **Lenis** smooth scroll, **Tailwind CSS**, and **EmailJS** for the contact form.
 
 ## Quick start
 
@@ -45,7 +45,7 @@ Add your PDF as `public/resume.pdf` so the **Download Resume** button works.
 
 - React 18, Vite 5  
 - `@react-three/fiber`, `@react-three/drei`, `three`  
-- `framer-motion`, `gsap`, `lenis`, `@emailjs/browser`, `lucide-react`  
+- `framer-motion`, `lenis`, `@emailjs/browser`, `lucide-react`  
 - Tailwind CSS  
 
 ---

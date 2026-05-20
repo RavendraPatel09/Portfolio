@@ -5,7 +5,7 @@ export default function Loader({ done }) {
     <AnimatePresence>
       {!done && (
         <motion.div
-          className="fixed inset-0 z-[11000] flex items-center justify-center bg-[var(--bg)]"
+          className={`fixed inset-0 z-[11000] flex items-center justify-center bg-[var(--bg)] ${done ? 'pointer-events-none' : ''}`}
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.65, ease: [0.4, 0, 0.2, 1] }}

@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SectionReveal from './SectionReveal'
 
 const USER = 'RavendraPatel09'
@@ -40,7 +39,6 @@ export default function GitHubStats() {
                 alt={`${USER} GitHub stats`}
                 className="h-auto w-full"
                 loading="lazy"
-                onLoad={() => ScrollTrigger.refresh()}
               />
             </motion.div>
             <motion.div
@@ -55,7 +53,6 @@ export default function GitHubStats() {
                 alt={`${USER} GitHub streak`}
                 className="h-auto w-full"
                 loading="lazy"
-                onLoad={() => ScrollTrigger.refresh()}
               />
             </motion.div>
             <motion.div
@@ -70,7 +67,6 @@ export default function GitHubStats() {
                 alt={`${USER} top languages`}
                 className="mx-auto h-auto w-full max-w-3xl"
                 loading="lazy"
-                onLoad={() => ScrollTrigger.refresh()}
               />
             </motion.div>
           </div>
