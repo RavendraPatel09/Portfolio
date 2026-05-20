@@ -4,8 +4,8 @@ export const skillGroups = [
     glow: 'from-neon/30 to-electric/20',
     items: [
       { name: 'Python', icon: '🐍', percent: 85 },
-      { name: 'C', icon: '©', percent: 75 },
-      { name: 'C++', icon: '⚙️', percent: 80 },
+      { name: 'C', icon: null, percent: 75 },
+      { name: 'C++', icon: null, percent: 80 },
       { name: 'HTML', icon: '📄', percent: 90 },
       { name: 'CSS', icon: '🎨', percent: 85 },
     ],
@@ -28,8 +28,8 @@ export const skillGroups = [
     title: 'Learning',
     glow: 'from-electric/25 to-neon/25',
     items: [
-      { name: 'Generative AI', icon: '🔥', percent: null, label: 'In progress' },
-      { name: 'Advanced DSA', icon: '⚡', percent: null, label: 'In progress' },
+      { name: 'Generative AI', icon: '🔥', percent: null, label: 'Generative AI 🔥' },
+      { name: 'Advanced DSA', icon: '⚡', percent: null, label: 'Advanced DSA ⚡' },
     ],
   },
 ]
