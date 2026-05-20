@@ -1,38 +1,15 @@
-import { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-
-gsap.registerPlugin(ScrollTrigger)
+import { motion } from 'framer-motion'
 
 export default function SectionReveal({ children, className = '' }) {
-  const root = useRef(null)
-
-  useEffect(() => {
-    const el = root.current
-    if (!el) return
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        el,
-        { autoAlpha: 0, y: 56 },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.85,
-          ease: 'power3.out',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top 88%',
-            toggleActions: 'play none none none',
-          },
-        },
-      )
-    }, el)
-    return () => ctx.revert()
-  }, [])
-
   return (
-    <div ref={root} className={className}>
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: 48 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.12, margin: '0px 0px -8% 0px' }}
+      transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+    >
       {children}
-    </div>
+    </motion.div>
   )
 }

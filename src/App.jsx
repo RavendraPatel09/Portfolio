@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Lenis from 'lenis'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
@@ -14,17 +12,27 @@ import Footer from './components/Footer.jsx'
 import CustomCursor from './components/CustomCursor.jsx'
 import Loader from './components/Loader.jsx'
 
-gsap.registerPlugin(ScrollTrigger)
+function readStoredTheme() {
+  try {
+    return localStorage.getItem('rp-theme') || 'dark'
+  } catch {
+    return 'dark'
+  }
+}
 
 export default function App() {
-  const [theme, setTheme] = useState(() => localStorage.getItem('rp-theme') || 'dark')
+  const [theme, setTheme] = useState(readStoredTheme)
   const [loaderDone, setLoaderDone] = useState(false)
   const [progress, setProgress] = useState(0)
   const lenisRef = useRef(null)
 
   useEffect(() => {
     document.documentElement.classList.toggle('light', theme === 'light')
-    localStorage.setItem('rp-theme', theme)
+    try {
+      localStorage.setItem('rp-theme', theme)
+    } catch {
+      /* ignore */
+    }
   }, [theme])
 
   useEffect(() => {
@@ -41,7 +49,6 @@ export default function App() {
     lenisRef.current = lenis
 
     const handleScroll = (l) => {
-      ScrollTrigger.update()
       setProgress(typeof l.progress === 'number' ? l.progress : 0)
     }
     lenis.on('scroll', handleScroll)
@@ -52,8 +59,6 @@ export default function App() {
       raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)
-
-    ScrollTrigger.refresh()
 
     return () => {
       cancelAnimationFrame(raf)
@@ -85,7 +90,7 @@ export default function App() {
 
       <Navbar theme={theme} toggleTheme={toggleTheme} />
 
-      <main>
+      <main className="relative z-[2]">
         <Hero />
         <About />
         <Skills />
