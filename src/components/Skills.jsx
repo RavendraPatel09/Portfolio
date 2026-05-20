@@ -5,7 +5,7 @@ function SkillFlipCard({ name, icon, percent, label }) {
   const showPct = percent != null
 
   return (
-    <div className={`flip-card group h-40 sm:h-44 ${glow}`}>
+    <div className="flip-card group h-40 sm:h-44">
       <div className="flip-card-inner relative h-full w-full">
         <div className="flip-face glass absolute inset-0 flex flex-col items-center justify-center rounded-2xl border border-[var(--glass-border)] p-4 transition-shadow duration-300 group-hover:shadow-[0_0_32px_rgba(0,255,157,0.18)]">
           {icon ? (
