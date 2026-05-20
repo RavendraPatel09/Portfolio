@@ -9,6 +9,21 @@ npm install
 npm run dev
 ```
 
+Then open the URL Vite prints (usually `http://localhost:5173`).
+
+### VS Code “Go Live” (Live Server)
+
+This project is **Vite + React**, not plain HTML. **Go Live** only serves static files, so it must use the **production build** in `dist/` (already configured in `.vscode/settings.json`).
+
+1. Run **`npm run build`** once (or use **Terminal → Run Build Task**, default **Ctrl+Shift+B** / **Cmd+Shift+B**).
+2. Click **Go Live** — Live Server will serve from **`dist/`** and the site should load normally.
+
+After you change source code, run **`npm run build`** again before refreshing Go Live.
+
+### VS Code Run and Debug (dev server)
+
+Use **Run → Start Debugging** and pick **“Vite: dev server”** for hot reload (same as `npm run dev`).
+
 Build:
 
 ```bash

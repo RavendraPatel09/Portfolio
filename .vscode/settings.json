@@ -1,11 +1,4 @@
 {
   "liveServer.settings.port": 5501,
-  "liveServer.settings.root": "dist",
-  "liveServer.settings.file": "index.html",
-  "liveServer.settings.ignoreFiles": [
-    ".vscode/**",
-    "node_modules/**",
-    "src/**",
-    "*.md"
-  ]
+  "liveServer.settings.root": "/dist"
 }

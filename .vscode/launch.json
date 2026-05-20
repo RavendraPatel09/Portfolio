@@ -2,10 +2,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Vite: dev (recommended for development)",
-      "type": "node-terminal",
+      "name": "Vite: dev server",
+      "type": "node",
       "request": "launch",
-      "command": "npm run dev"
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
     }
   ]
 }
