@@ -25,7 +25,8 @@ export default class ErrorBoundary extends Component {
           <h1 style={{ color: '#00FF9D', marginBottom: '1rem' }}>Portfolio failed to load</h1>
           <p style={{ color: '#A0AEC0', marginBottom: '1rem' }}>
             Run <code style={{ color: '#00B4FF' }}>npm --prefix frontend run dev</code> or{' '}
-            <code style={{ color: '#00B4FF' }}>npm start</code> — do not open raw HTML without Vite.
+            <code style={{ color: '#00B4FF' }}>npm --prefix frontend start</code> — do not open raw HTML
+            without Vite.
           </p>
           <pre
             style={{

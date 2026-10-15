@@ -23,7 +23,10 @@ export default function Contact() {
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
     if (!serviceId || !templateId || !publicKey) {
-      setToast({ type: 'error', text: 'Configure EmailJS keys in .env (see .env.example).' })
+      setToast({
+        type: 'error',
+        text: 'Configure EmailJS keys in frontend/.env (see frontend/.env.example).',
+      })
       setSending(false)
       return
     }
