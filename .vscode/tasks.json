@@ -3,8 +3,8 @@
   "tasks": [
     {
       "label": "Run portfolio (build + preview)",
-      "type": "npm",
-      "script": "start",
+      "type": "shell",
+      "command": "npm --prefix frontend start",
       "group": {
         "kind": "build",
         "isDefault": true
@@ -17,8 +17,8 @@
     },
     {
       "label": "Dev server (hot reload)",
-      "type": "npm",
-      "script": "dev",
+      "type": "shell",
+      "command": "npm --prefix frontend run dev",
       "presentation": {
         "reveal": "always",
         "panel": "shared"
