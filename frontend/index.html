@@ -29,10 +29,21 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('rp-theme');
+          var isLight = saved === 'light' || (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches);
+          if (isLight) {
+            document.documentElement.classList.add('light');
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
-  <body style="margin:0;background:#0a0a0f;color:#fff;font-family:Inter,system-ui,sans-serif">
+  <body class="bg-[var(--bg)] text-[var(--text)] transition-colors duration-200">
     <div id="root">
-      <p style="padding:2rem;color:#a0aec0">Loading portfolio…</p>
+      <p style="padding:2rem;color:var(--text-muted, #a0aec0)">Loading portfolio…</p>
     </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

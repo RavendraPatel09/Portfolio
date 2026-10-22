@@ -51,8 +51,8 @@ export default function Navbar({ theme, toggleTheme }) {
       <nav
         className={`mx-auto flex max-w-6xl items-center justify-between rounded-2xl border px-4 py-3 sm:px-6 transition-all duration-300 ${
           scrolled
-            ? 'glass border-[var(--glass-border)] bg-[var(--bg)]/85 shadow-[0_12px_32px_rgba(0,0,0,0.3)] backdrop-blur-xl'
-            : 'glass border-[var(--glass-border)] bg-[var(--bg)]/50 backdrop-blur-md'
+            ? 'glass border-[var(--glass-border)] bg-[var(--card-bg)]/90 shadow-[var(--card-shadow)] backdrop-blur-xl'
+            : 'glass border-[var(--glass-border)] bg-[var(--card-bg)]/70 backdrop-blur-md'
         }`}
       >
         <button
@@ -131,7 +131,7 @@ export default function Navbar({ theme, toggleTheme }) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.98 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
-            className="glass mt-3 flex flex-col gap-1 rounded-2xl border border-[var(--glass-border)] bg-[var(--bg)]/90 p-3 shadow-2xl backdrop-blur-2xl md:hidden"
+            className="glass mt-3 flex flex-col gap-1 rounded-2xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-3 shadow-[var(--card-shadow)] backdrop-blur-2xl md:hidden"
           >
             {links.map((l) => (
               <button
@@ -141,7 +141,7 @@ export default function Navbar({ theme, toggleTheme }) {
                 className={`rounded-xl px-4 py-3 text-left text-sm font-semibold transition-colors duration-150 ${
                   active === l.id
                     ? 'bg-[var(--neon)]/15 text-[var(--neon)] border border-[var(--neon)]/30'
-                    : 'text-[var(--text-muted)] hover:bg-white/5 hover:text-[var(--text)]'
+                    : 'text-[var(--text-muted)] hover:bg-[var(--chip-bg)] hover:text-[var(--text)]'
                 }`}
               >
                 {l.label}

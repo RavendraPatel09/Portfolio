@@ -2,6 +2,7 @@ import { lazy, Suspense, useRef, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronDown, ArrowRight, FileText } from 'lucide-react'
 import { useMagnetic } from '../hooks/useMagnetic'
+import HangingIdCard from './HangingIdCard.jsx'
 
 const HeroScene = lazy(() => import('./HeroScene.jsx'))
 
@@ -115,7 +116,7 @@ export default function Hero() {
     <section
       id="home"
       ref={heroRef}
-      className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-[var(--bg)] pt-28"
+      className="relative overflow-hidden bg-[var(--bg)] pt-24 pb-8 sm:pt-28 sm:pb-10"
     >
       <div className="pointer-events-none absolute inset-0 z-0 min-h-full">
         <HeroBgFallback />
@@ -134,72 +135,82 @@ export default function Hero() {
       />
 
       <div
-        className="relative z-10 mx-auto flex max-w-6xl flex-col px-6 pb-28 pt-8 sm:px-8"
+        className="relative z-10 mx-auto flex max-w-6xl flex-col lg:flex-row lg:items-center lg:justify-between px-6 sm:px-8 gap-8 lg:gap-12"
         style={{ transform: 'translateY(var(--py2, 0px))' }}
       >
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-4 flex flex-wrap items-center gap-3"
-        >
-          <span className="font-mono text-sm font-semibold text-[var(--electric)]">@RavendraPatel09</span>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--neon)]/30 bg-[var(--neon)]/10 px-3 py-1 text-xs font-semibold text-[var(--neon)]">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--neon)]" />
-            CS Undergrad · OIST Bhopal &apos;28
-          </span>
-        </motion.div>
+        <div className="max-w-2xl">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-3.5 flex flex-wrap items-center gap-3"
+          >
+            <span className="font-mono text-sm font-semibold text-[var(--electric)]">@RavendraPatel09</span>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--neon)]/30 bg-[var(--neon)]/10 px-3 py-1 text-xs font-semibold text-[var(--neon)]">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--neon)]" />
+              CS Undergrad · OIST Bhopal &apos;28
+            </span>
+          </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="glitch font-display text-4xl font-bold leading-tight tracking-tight text-[var(--text)] sm:text-5xl md:text-6xl lg:text-7xl"
-          data-text={"Hi, I'm Ravendra Patel 👋"}
-        >
-          Hi, I&apos;m Ravendra Patel 👋
-        </motion.h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="glitch font-display text-4xl font-bold leading-tight tracking-tight text-[var(--text)] sm:text-5xl md:text-6xl lg:text-7xl"
+            data-text={"Hi, I'm Ravendra Patel 👋"}
+          >
+            Hi, I&apos;m Ravendra Patel 👋
+          </motion.h1>
 
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-6 min-h-[2.75rem] font-display text-xl font-medium text-[var(--text-muted)] sm:text-2xl md:text-3xl"
-        >
-          <Typewriter />
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-5 min-h-[2.5rem] font-display text-xl font-medium text-[var(--text-muted)] sm:text-2xl md:text-3xl"
+          >
+            <Typewriter />
+          </motion.div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-4 max-w-2xl text-base leading-relaxed text-[var(--text-muted)] sm:text-lg md:text-xl"
-        >
-          Building scalable applications, understanding system internals, and solving algorithmic problems. Passionate about engineering systems that connect intuitive frontends to robust backends.
-        </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-3.5 max-w-2xl text-base leading-relaxed text-[var(--text-muted)] sm:text-lg md:text-xl"
+          >
+            Building scalable applications, understanding system internals, and solving algorithmic problems. Passionate about engineering systems that connect intuitive frontends to robust backends.
+          </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-10 flex flex-wrap items-center gap-4"
-        >
-          <MagneticPrimaryCTA onClick={goProjects}>View My Work</MagneticPrimaryCTA>
-          <MagneticSecondaryCTA href="./resume.pdf" download>
-            Download Resume
-          </MagneticSecondaryCTA>
-        </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-7 flex flex-wrap items-center gap-4"
+          >
+            <MagneticPrimaryCTA onClick={goProjects}>View My Work</MagneticPrimaryCTA>
+            <MagneticSecondaryCTA href="./resume.pdf" download>
+              Download Resume
+            </MagneticSecondaryCTA>
+          </motion.div>
+        </div>
+
+        {/* Realistic Hanging Event ID Card */}
+        <div className="hidden lg:flex lg:flex-col lg:items-center shrink-0 self-start lg:-mt-16 xl:-mt-20 lg:mr-2 xl:mr-6">
+          <HangingIdCard />
+        </div>
       </div>
 
-      <button
-        type="button"
-        className="group absolute bottom-10 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-1.5 text-[var(--text-muted)] transition-colors hover:text-[var(--neon)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon)] rounded-lg p-2"
-        onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
-        aria-label="Scroll to about"
-      >
-        <span className="text-[11px] font-semibold tracking-widest uppercase">SCROLL</span>
-        <ChevronDown className="h-5 w-5 animate-bounce text-[var(--neon)] transition-transform group-hover:translate-y-0.5" />
-      </button>
+      {/* Repositioned, Content-Driven Scroll Indicator */}
+      <div className="relative z-10 mt-6 sm:mt-8 flex justify-center">
+        <button
+          type="button"
+          className="group flex flex-col items-center gap-1 text-[var(--text-muted)] transition-colors hover:text-[var(--neon)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon)] rounded-lg p-1.5"
+          onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+          aria-label="Scroll to about"
+        >
+          <span className="text-[10px] font-semibold tracking-widest uppercase">SCROLL</span>
+          <ChevronDown className="h-4 w-4 animate-bounce text-[var(--neon)] transition-transform group-hover:translate-y-0.5" />
+        </button>
+      </div>
     </section>
   )
 }

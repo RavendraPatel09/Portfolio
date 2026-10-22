@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import { Terminal, Code2, Database, Cpu } from 'lucide-react'
+import { Terminal, Code2, Database, Cpu, MapPin, GraduationCap } from 'lucide-react'
 import SectionReveal from './SectionReveal'
 
 const STATS = [
@@ -82,8 +82,8 @@ function ProfileCard3D() {
   const ref = useRef(null)
   const mx = useMotionValue(0)
   const my = useMotionValue(0)
-  const rx = useSpring(useTransform(my, [-0.5, 0.5], [8, -8]), { stiffness: 120, damping: 18 })
-  const ry = useSpring(useTransform(mx, [-0.5, 0.5], [-10, 10]), { stiffness: 120, damping: 18 })
+  const rx = useSpring(useTransform(my, [-0.5, 0.5], [6, -6]), { stiffness: 120, damping: 18 })
+  const ry = useSpring(useTransform(mx, [-0.5, 0.5], [-8, 8]), { stiffness: 120, damping: 18 })
 
   const onMove = (e) => {
     const el = ref.current
@@ -102,31 +102,82 @@ function ProfileCard3D() {
       ref={ref}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
-      style={{ rotateX: rx, rotateY: ry, transformPerspective: 1100 }}
-      className="relative mx-auto aspect-[4/5] w-full max-w-sm cursor-default rounded-3xl p-[1px]"
+      style={{ rotateX: rx, rotateY: ry, transformPerspective: 1000 }}
+      className="relative mx-auto w-full max-w-sm cursor-default rounded-3xl p-[1px] transition-shadow duration-300"
     >
-      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[var(--neon)]/40 via-[var(--electric)]/25 to-transparent opacity-75 blur-sm transition-opacity duration-300 hover:opacity-100" />
-      <div className="glass relative flex h-full flex-col items-center justify-between rounded-3xl border border-[var(--glass-border)] bg-[var(--bg)]/70 p-8 shadow-[0_0_60px_rgba(0,255,157,0.08)] backdrop-blur-xl">
-        <div className="flex w-full items-center justify-between border-b border-[var(--glass-border)] pb-4 text-xs font-mono text-[var(--text-muted)]">
-          <span className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-[var(--neon)] animate-pulse" />
-            <span>DEV_PROFILE</span>
-          </span>
-          <span className="text-[var(--electric)]">v2028.grad</span>
-        </div>
+      {/* Ambient gradient aura */}
+      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[var(--neon)]/30 via-[var(--electric)]/20 to-transparent opacity-60 blur-md transition-opacity duration-300 hover:opacity-90" />
 
-        <div className="flex flex-col items-center text-center">
-          <div className="mb-4 flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-[var(--neon)]/20 to-[var(--electric)]/15 text-3xl font-bold font-display text-[var(--neon)] shadow-inner ring-1 ring-[var(--neon)]/30">
-            RP
+      {/* Main card body with natural, content-driven height */}
+      <div className="glass relative flex flex-col rounded-3xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-6 sm:p-7 shadow-[var(--card-shadow)] backdrop-blur-xl transition-colors duration-300">
+        {/* A. COMPACT HEADER */}
+        <div className="flex items-center justify-between border-b border-[var(--glass-border)] pb-3.5">
+          <div className="flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--neon)] opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--neon)]" />
+            </span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-[var(--text)]">
+              Engineering Profile
+            </span>
           </div>
-          <h3 className="font-display text-2xl font-bold text-[var(--text)]">Ravendra Patel</h3>
-          <p className="mt-1 font-mono text-xs font-semibold text-[var(--electric)]">Software Developer</p>
-          <p className="mt-2 text-xs text-[var(--text-muted)]">Bhopal, MP, India</p>
+
+          <span className="inline-flex items-center rounded-full border border-[var(--electric)]/30 bg-[var(--electric)]/10 px-2.5 py-0.5 font-mono text-[10px] font-semibold tracking-wider text-[var(--electric)]">
+            CSE · 2028
+          </span>
         </div>
 
-        <div className="w-full rounded-2xl border border-[var(--glass-border)] bg-black/20 p-3.5 text-center">
-          <p className="text-[11px] font-mono text-[var(--neon)]">Oriental Institute of Science & Tech</p>
-          <p className="mt-1 text-[11px] text-[var(--text-muted)]">Computer Science Engineering (2024–2028)</p>
+        {/* B. MAIN IDENTITY AREA */}
+        <div className="py-5">
+          <div className="flex items-center gap-4">
+            {/* Refined RP Monogram Emblem */}
+            <div className="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-[var(--neon)]/30 bg-gradient-to-br from-[var(--neon)]/15 via-[var(--neon)]/5 to-[var(--electric)]/15 shadow-inner ring-1 ring-[var(--neon)]/20">
+              <span className="font-display text-2xl font-bold tracking-tight text-[var(--neon)]">
+                RP
+              </span>
+              <div className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full border border-[var(--glass-border)] bg-[var(--card-bg)] shadow-sm">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--electric)]" />
+              </div>
+            </div>
+
+            {/* Name, Role & Location */}
+            <div className="min-w-0 flex-1">
+              <h3 className="font-display text-xl font-bold tracking-tight text-[var(--text)] sm:text-2xl truncate">
+                Ravendra Patel
+              </h3>
+              <p className="mt-0.5 text-xs font-semibold text-[var(--electric)] sm:text-sm">
+                Software Developer
+              </p>
+              <div className="mt-1.5 flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
+                <MapPin size={12} className="shrink-0 text-[var(--text-muted)] opacity-80" />
+                <span className="truncate">Bhopal, Madhya Pradesh, India</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* C. REFINED EDUCATION AREA */}
+        <div className="rounded-2xl border border-[var(--glass-border)] bg-[var(--chip-bg)] p-4 transition-colors duration-200">
+          <div className="flex items-center justify-between pb-2 border-b border-[var(--glass-border)]/60">
+            <div className="flex items-center gap-1.5">
+              <GraduationCap size={13} className="text-[var(--electric)]" />
+              <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]">
+                Undergraduate
+              </span>
+            </div>
+            <span className="font-mono text-[11px] font-semibold text-[var(--neon)]">
+              2024 – 2028
+            </span>
+          </div>
+
+          <div className="pt-2.5">
+            <h4 className="font-display text-sm font-semibold text-[var(--text)] leading-snug">
+              Oriental Institute of Science &amp; Technology
+            </h4>
+            <p className="mt-1 text-xs font-medium text-[var(--electric)]">
+              Computer Science Engineering
+            </p>
+          </div>
         </div>
       </div>
     </motion.div>
@@ -152,11 +203,11 @@ export default function About() {
       <section
         id="about"
         ref={wrap}
-        className="relative scroll-mt-24 px-6 py-24 sm:px-8"
+        className="relative scroll-mt-24 px-6 py-14 sm:py-16 sm:px-8"
         style={{ transform: 'translateY(var(--ay, 0px))' }}
       >
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-14 lg:grid-cols-2 lg:items-center">
+          <div className="grid gap-8 lg:gap-10 lg:grid-cols-2 lg:items-center">
             <ProfileCard3D />
 
             <div>
@@ -164,15 +215,15 @@ export default function About() {
                 About Me
               </div>
 
-              <h2 className="mt-4 font-display text-3xl font-bold sm:text-4xl md:text-5xl">
+              <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl md:text-5xl">
                 Engineering Curiosity &amp; <span className="text-[var(--neon)]">Continuous Building</span>
               </h2>
 
-              <p className="mt-4 text-base font-medium text-[var(--electric)] sm:text-lg">
+              <p className="mt-3 text-base font-medium text-[var(--electric)] sm:text-lg">
                 Computer Science Undergraduate @ Oriental Institute of Science and Technology, Bhopal (Graduation 2028)
               </p>
 
-              <div className="mt-6 space-y-4 text-base leading-relaxed text-[var(--text-muted)]">
+              <div className="mt-5 space-y-3.5 text-base leading-relaxed text-[var(--text-muted)]">
                 <p>
                   I am a passionate software developer fascinated by how things work under the hood. For me, software engineering is not merely about writing syntax—it&apos;s about understanding how data moves through networks, how frontend experiences interface with backend APIs, and how databases maintain consistency.
                 </p>
@@ -181,13 +232,13 @@ export default function About() {
                 </p>
               </div>
 
-              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
                 {PILLARS.map((p) => {
                   const Icon = p.icon
                   return (
                     <div
                       key={p.title}
-                      className="glass flex items-start gap-3 rounded-2xl border border-[var(--glass-border)] p-3.5 transition-all duration-200 hover:border-[var(--neon)]/30"
+                      className="glass flex items-start gap-3 rounded-2xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-3.5 shadow-[var(--card-shadow)] transition-all duration-200 hover:border-[var(--neon)]/30"
                     >
                       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[var(--neon)]/10 text-[var(--neon)]">
                         <Icon size={16} />
@@ -201,14 +252,14 @@ export default function About() {
                 })}
               </div>
 
-              <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+              <div className="mt-6 grid grid-cols-2 gap-3.5 sm:grid-cols-4">
                 {STATS.map((s) => (
                   <div
                     key={s.label}
-                    className="glass rounded-2xl border border-[var(--glass-border)] p-4 text-center transition-all duration-200 hover:border-[var(--electric)]/30"
+                    className="glass rounded-2xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-3.5 text-center shadow-[var(--card-shadow)] transition-all duration-200 hover:border-[var(--electric)]/30"
                   >
                     <Counter value={s.value} suffix={s.suffix} />
-                    <p className="mt-2 text-xs font-medium text-[var(--text-muted)]">{s.label}</p>
+                    <p className="mt-1.5 text-xs font-medium text-[var(--text-muted)]">{s.label}</p>
                   </div>
                 ))}
               </div>

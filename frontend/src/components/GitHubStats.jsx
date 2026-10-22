@@ -1,56 +1,141 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { Activity, GitCommit, GitPullRequest } from 'lucide-react'
+import { Activity, GitCommit, Star, ExternalLink, Code2, Flame } from 'lucide-react'
 import SectionReveal from './SectionReveal'
+import { useTheme } from '../context/ThemeContext'
 
 const USER = 'RavendraPatel09'
-const base = `https://github-readme-stats.vercel.app`
-const streak = `https://github-readme-streak-stats.demolab.com`
+const base = 'https://github-readme-stats.vercel.app'
+const streak = 'https://github-readme-streak-stats.demolab.com'
 
-const qs =
-  'username=' +
-  USER +
-  '&show_icons=true&hide_border=true&bg_color=0a0a0f&title_color=00FF9D&icon_color=00B4FF&text_color=FFFFFF&border_radius=12'
+function getStatsUrl(isLight) {
+  const bg = isLight ? 'ffffff' : '0a0a0f'
+  const title = isLight ? '059669' : '00FF9D'
+  const icon = isLight ? '0284c7' : '00B4FF'
+  const text = isLight ? '0f172a' : 'FFFFFF'
 
-const statsUrl = `${base}/api?${qs}`
-const langsUrl = `${base}/api/top-langs/?username=${USER}&layout=compact&hide_border=true&bg_color=0a0a0f&title_color=00FF9D&text_color=FFFFFF&border_radius=12`
-const streakUrl = `${streak}/?user=${USER}&theme=dark&hide_border=true&background=0a0a0f&ring=00FF9D&fire=00B4FF&currStreakLabel=00FF9D&sideLabels=00B4FF&border_radius=12`
+  return `${base}/api?username=${USER}&show_icons=true&hide_border=true&bg_color=${bg}&title_color=${title}&icon_color=${icon}&text_color=${text}&border_radius=16&cache_seconds=1800`
+}
 
-function StatImageCard({ src, alt, className = '', containerClassName = '' }) {
+function getLangsUrl(isLight) {
+  const bg = isLight ? 'ffffff' : '0a0a0f'
+  const title = isLight ? '059669' : '00FF9D'
+  const text = isLight ? '0f172a' : 'FFFFFF'
+
+  return `${base}/api/top-langs/?username=${USER}&layout=compact&hide_border=true&bg_color=${bg}&title_color=${title}&text_color=${text}&border_radius=16&cache_seconds=1800`
+}
+
+function getStreakUrl(isLight) {
+  if (isLight) {
+    return `${streak}/?user=${USER}&theme=light&hide_border=true&background=ffffff&border=ffffff&ring=059669&fire=0284c7&currStreakLabel=059669&sideLabels=0284c7&currStreakNum=0f172a&sideNums=0f172a&dates=64748b&border_radius=16`
+  }
+  return `${streak}/?user=${USER}&theme=dark&hide_border=true&background=0a0a0f&ring=00FF9D&fire=00B4FF&currStreakLabel=00FF9D&sideLabels=00B4FF&border_radius=16`
+}
+
+function StatImageCard({ src, alt, className = '', containerClassName = '', fallbackType = 'stats' }) {
   const [loaded, setLoaded] = useState(false)
   const [failed, setFailed] = useState(false)
 
+  // Reset loading & failure state immediately whenever src (theme) changes
+  useEffect(() => {
+    setLoaded(false)
+    setFailed(false)
+  }, [src])
+
   return (
     <div
-      className={`glass relative overflow-hidden rounded-3xl border border-[var(--glass-border)] p-4 sm:p-5 flex items-center justify-center transition-all duration-300 hover:border-[var(--neon)]/30 ${containerClassName}`}
+      className={`glass relative overflow-hidden rounded-3xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-4 sm:p-5 flex items-center justify-center transition-all duration-300 shadow-[var(--card-shadow)] hover:border-[var(--neon)]/30 ${containerClassName}`}
     >
+      {/* Loading Skeleton */}
       {!loaded && !failed && (
-        <div className="flex h-48 w-full animate-pulse items-center justify-center rounded-2xl bg-white/5 text-xs text-[var(--text-muted)]">
-          Loading metrics…
+        <div className="flex h-52 w-full animate-pulse flex-col items-center justify-center gap-3 rounded-2xl border border-[var(--glass-border)] bg-[var(--chip-bg)] p-6 text-xs text-[var(--text-muted)]">
+          <div className="h-6 w-36 rounded-lg bg-[var(--text-muted)]/15" />
+          <div className="h-24 w-full max-w-sm rounded-xl bg-[var(--text-muted)]/10" />
+          <span className="font-mono text-[11px] text-[var(--text-muted)]">Loading GitHub data…</span>
         </div>
       )}
+
+      {/* Fallback View if External SVG Service is Down / Blocked */}
       {failed ? (
-        <div className="flex h-48 w-full flex-col items-center justify-center gap-2 rounded-2xl bg-white/5 p-4 text-center text-xs text-[var(--text-muted)]">
-          <Activity size={20} className="text-[var(--neon)] opacity-60" />
-          <span>Live stats available on GitHub profile</span>
-          <a
-            href={`https://github.com/${USER}`}
-            target="_blank"
-            rel="noreferrer"
-            className="text-[var(--neon)] underline"
-          >
-            Visit @{USER}
-          </a>
+        <div className="flex min-h-[13rem] w-full flex-col justify-between rounded-2xl border border-[var(--glass-border)] bg-[var(--chip-bg)] p-5 text-center">
+          <div className="flex items-center justify-between border-b border-[var(--glass-border)] pb-3">
+            <div className="flex items-center gap-2">
+              <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--neon)]/10 text-[var(--neon)]">
+                {fallbackType === 'streak' ? <Flame size={15} /> : fallbackType === 'langs' ? <Code2 size={15} /> : <Activity size={15} />}
+              </span>
+              <span className="text-xs font-bold text-[var(--text)]">
+                {fallbackType === 'streak' ? 'Contribution Streak' : fallbackType === 'langs' ? 'Top Languages' : 'GitHub Overview'}
+              </span>
+            </div>
+            <span className="text-[10px] font-mono text-[var(--electric)]">@{USER}</span>
+          </div>
+
+          <div className="py-4">
+            {fallbackType === 'langs' ? (
+              <div className="space-y-2 text-left">
+                <div className="flex justify-between text-xs font-semibold text-[var(--text)]">
+                  <span>C++ / Python / JavaScript / HTML</span>
+                  <span className="text-[var(--neon)]">Core Stack</span>
+                </div>
+                <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-[var(--glass-border)]">
+                  <div className="h-full bg-blue-500" style={{ width: '45%' }} title="C++" />
+                  <div className="h-full bg-emerald-500" style={{ width: '30%' }} title="Python" />
+                  <div className="h-full bg-amber-400" style={{ width: '15%' }} title="JavaScript" />
+                  <div className="h-full bg-sky-400" style={{ width: '10%' }} title="HTML/CSS" />
+                </div>
+              </div>
+            ) : fallbackType === 'streak' ? (
+              <div className="grid grid-cols-2 gap-3 text-center">
+                <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-3">
+                  <p className="font-display text-2xl font-bold text-[var(--neon)]">Active</p>
+                  <p className="text-[11px] text-[var(--text-muted)]">Continuous Coding</p>
+                </div>
+                <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-3">
+                  <p className="font-display text-2xl font-bold text-[var(--electric)]">100%</p>
+                  <p className="text-[11px] text-[var(--text-muted)]">Practice Consistency</p>
+                </div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-2.5">
+                  <p className="font-display text-lg font-bold text-[var(--neon)]">9+</p>
+                  <p className="text-[10px] text-[var(--text-muted)]">Repositories</p>
+                </div>
+                <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-2.5">
+                  <p className="font-display text-lg font-bold text-[var(--electric)]">40+</p>
+                  <p className="text-[10px] text-[var(--text-muted)]">Commits</p>
+                </div>
+                <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-2.5">
+                  <p className="font-display text-lg font-bold text-[var(--neon)]">Public</p>
+                  <p className="text-[10px] text-[var(--text-muted)]">Open Source</p>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <div className="flex items-center justify-between pt-2">
+            <span className="text-[11px] text-[var(--text-muted)]">Metrics available directly on profile</span>
+            <a
+              href={`https://github.com/${USER}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1 text-xs font-semibold text-[var(--neon)] transition-colors hover:text-[var(--text)]"
+            >
+              <span>View GitHub</span>
+              <ExternalLink size={12} />
+            </a>
+          </div>
         </div>
       ) : (
         <img
+          key={src}
           src={src}
           alt={alt}
           loading="lazy"
           onLoad={() => setLoaded(true)}
           onError={() => setFailed(true)}
-          className={`h-auto w-full transition-opacity duration-500 ${
-            loaded ? 'opacity-100' : 'opacity-0 absolute'
+          className={`h-auto w-full transition-opacity duration-300 ${
+            loaded ? 'opacity-100' : 'opacity-0 absolute pointer-events-none'
           } ${className}`}
         />
       )}
@@ -58,37 +143,48 @@ function StatImageCard({ src, alt, className = '', containerClassName = '' }) {
   )
 }
 
-export default function GitHubStats() {
+export default function GitHubStats({ theme: propTheme }) {
+  const { theme: ctxTheme, isLight: ctxIsLight } = useTheme()
+  const activeTheme = propTheme || ctxTheme
+  const isLight = activeTheme === 'light' || ctxIsLight
+
+  const statsUrl = getStatsUrl(isLight)
+  const streakUrl = getStreakUrl(isLight)
+  const langsUrl = getLangsUrl(isLight)
+
   return (
     <SectionReveal>
-      <section id="github-stats" className="scroll-mt-24 px-6 py-24 sm:px-8">
+      <section id="github-stats" className="scroll-mt-24 px-6 py-14 sm:py-16 sm:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="text-center">
             <span className="inline-block rounded-full border border-[var(--electric)]/30 bg-[var(--electric)]/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-[var(--electric)]">
               Activity &amp; Metrics
             </span>
-            <h2 className="mt-4 font-display text-3xl font-bold sm:text-4xl md:text-5xl">
+            <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl md:text-5xl">
               GitHub Insights <span className="text-[var(--electric)]">🌌</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-[var(--text-muted)] sm:text-lg">
+            <p className="mx-auto mt-3 max-w-2xl text-[var(--text-muted)] sm:text-lg">
               Live statistics reflecting continuous coding practice, open-source commits, and technology breakdown.
             </p>
           </div>
 
-          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+          <div className="mt-8 grid gap-4 sm:gap-5 lg:grid-cols-2">
             <StatImageCard
               src={statsUrl}
               alt={`${USER} GitHub stats`}
+              fallbackType="stats"
               className="max-h-64 object-contain"
             />
             <StatImageCard
               src={streakUrl}
               alt={`${USER} GitHub streak`}
+              fallbackType="streak"
               className="max-h-64 object-contain"
             />
             <StatImageCard
               src={langsUrl}
               alt={`${USER} top languages`}
+              fallbackType="langs"
               className="mx-auto max-h-64 max-w-3xl object-contain"
               containerClassName="lg:col-span-2"
             />

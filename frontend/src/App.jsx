@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+import { ThemeProvider, useTheme } from './context/ThemeContext.jsx'
 import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
 import About from './components/About.jsx'
@@ -10,28 +11,11 @@ import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
 import Loader from './components/Loader.jsx'
 
-function readStoredTheme() {
-  try {
-    return localStorage.getItem('rp-theme') || 'dark'
-  } catch {
-    return 'dark'
-  }
-}
-
-export default function App() {
-  const [theme, setTheme] = useState(readStoredTheme)
+function MainLayout() {
+  const { theme, toggleTheme } = useTheme()
   const [loaderDone, setLoaderDone] = useState(false)
   const [progress, setProgress] = useState(0)
   const lenisRef = useRef(null)
-
-  useEffect(() => {
-    document.documentElement.classList.toggle('light', theme === 'light')
-    try {
-      localStorage.setItem('rp-theme', theme)
-    } catch {
-      /* ignore */
-    }
-  }, [theme])
 
   useEffect(() => {
     const t = setTimeout(() => setLoaderDone(true), 800)
@@ -88,10 +72,6 @@ export default function App() {
     }
   }, [])
 
-  const toggleTheme = useCallback(() => {
-    setTheme((t) => (t === 'dark' ? 'light' : 'dark'))
-  }, [])
-
   const scrollTop = useCallback(() => {
     const l = lenisRef.current
     if (l) l.scrollTo(0, { duration: 1.1 })
@@ -115,11 +95,19 @@ export default function App() {
         <About />
         <Skills />
         <Projects />
-        <GitHubStats />
+        <GitHubStats theme={theme} />
         <Contact />
       </main>
 
       <Footer onTop={scrollTop} />
     </div>
+  )
+}
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <MainLayout />
+    </ThemeProvider>
   )
 }

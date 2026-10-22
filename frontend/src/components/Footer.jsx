@@ -35,7 +35,7 @@ function MagneticIcon({ href, label, children }) {
 
 export default function Footer({ onTop }) {
   return (
-    <footer className="relative z-[2] border-t border-[var(--glass-border)] bg-[var(--bg)]/40 px-6 py-12 sm:px-8">
+    <footer className="relative z-[2] border-t border-[var(--glass-border)] bg-[var(--bg)]/40 px-6 py-8 sm:py-10 sm:px-8">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 text-center sm:flex-row sm:text-left">
         <div>
           <p className="font-display text-base font-bold text-[var(--text)]">
