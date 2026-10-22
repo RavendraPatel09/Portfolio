@@ -1,7 +1,7 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import emailjs from '@emailjs/browser'
-import { Mail, MapPin, Linkedin, Github, Send } from 'lucide-react'
+import { Mail, MapPin, Linkedin, Github, Send, CheckCircle2, AlertCircle } from 'lucide-react'
 import SectionReveal from './SectionReveal'
 
 const TO_EMAIL = 'patelsamerth9@gmail.com'
@@ -22,12 +22,20 @@ export default function Contact() {
     const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
-    if (!serviceId || !templateId || !publicKey) {
+    // If EmailJS keys are the placeholders or missing, alert user gracefully
+    if (
+      !serviceId ||
+      !templateId ||
+      !publicKey ||
+      publicKey === 'your_public_key' ||
+      serviceId === 'your_service_id'
+    ) {
       setToast({
         type: 'error',
-        text: 'Configure EmailJS keys in frontend/.env (see frontend/.env.example).',
+        text: 'Configure real EmailJS keys in frontend/.env to enable direct mailing.',
       })
       setSending(false)
+      setTimeout(() => setToast(null), 5000)
       return
     }
 
@@ -44,79 +52,103 @@ export default function Contact() {
         },
         { publicKey },
       )
-      setToast({ type: 'success', text: 'Message sent! 🚀' })
+      setToast({ type: 'success', text: 'Message delivered successfully! 🚀' })
       setName('')
       setEmail('')
       setMessage('')
     } catch {
-      setToast({ type: 'error', text: 'Try again 😔' })
+      setToast({ type: 'error', text: 'Failed to send message. Please reach out directly via email.' })
     } finally {
       setSending(false)
-      setTimeout(() => setToast(null), 4200)
+      setTimeout(() => setToast(null), 4500)
     }
   }
 
   const cards = [
-    { icon: Mail, title: 'Email', value: TO_EMAIL, href: `mailto:${TO_EMAIL}` },
-    { icon: MapPin, title: 'Location', value: 'MP, India', href: null },
+    {
+      icon: Mail,
+      title: 'Email',
+      value: TO_EMAIL,
+      href: `mailto:${TO_EMAIL}`,
+      hint: 'Send an email',
+    },
+    {
+      icon: MapPin,
+      title: 'Location',
+      value: 'Bhopal, Madhya Pradesh, India',
+      href: null,
+      hint: 'Open to remote & onsite',
+    },
     {
       icon: Linkedin,
       title: 'LinkedIn',
       value: 'linkedin.com/in/ravendra-patel-3bb375338',
       href: 'https://www.linkedin.com/in/ravendra-patel-3bb375338/',
+      hint: 'Professional profile',
     },
     {
       icon: Github,
       title: 'GitHub',
       value: 'github.com/RavendraPatel09',
       href: 'https://github.com/RavendraPatel09',
+      hint: 'Source code & repositories',
     },
   ]
 
   return (
     <SectionReveal>
       <section id="contact" className="relative scroll-mt-24 overflow-hidden px-6 py-24 sm:px-8">
-        <div className="pointer-events-none absolute -left-32 top-20 h-80 w-80 rounded-full bg-[var(--neon)]/15 blur-[100px] aurora-blob" />
+        {/* Ambient glow backgrounds */}
+        <div className="pointer-events-none absolute -left-32 top-20 h-80 w-80 rounded-full bg-[var(--neon)]/10 blur-[120px] aurora-blob" />
         <div
-          className="pointer-events-none absolute -right-24 bottom-10 h-96 w-96 rounded-full bg-[var(--electric)]/20 blur-[110px] aurora-blob"
+          className="pointer-events-none absolute -right-24 bottom-10 h-96 w-96 rounded-full bg-[var(--electric)]/12 blur-[130px] aurora-blob"
           style={{ animationDelay: '-6s' }}
         />
 
         <div className="relative mx-auto max-w-6xl">
-          <h2 className="text-center font-display text-3xl font-bold sm:text-4xl md:text-5xl">
-            Establish Connection <span className="text-[var(--neon)]">📡</span>
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-center text-[var(--text-muted)]">
-            Let&apos;s collaborate — whether it&apos;s Gen AI, systems, or your next big idea.
-          </p>
+          <div className="text-center">
+            <span className="inline-block rounded-full border border-[var(--neon)]/30 bg-[var(--neon)]/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-[var(--neon)]">
+              Get In Touch
+            </span>
+            <h2 className="mt-4 font-display text-3xl font-bold sm:text-4xl md:text-5xl">
+              Start a Conversation <span className="text-[var(--neon)]">📡</span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-[var(--text-muted)] sm:text-lg">
+              Have a question, an opportunity, or want to collaborate on engineering projects? Feel free to reach out.
+            </p>
+          </div>
 
-          <div className="mt-14 grid gap-10 lg:grid-cols-2">
+          <div className="mt-14 grid gap-10 lg:grid-cols-2 lg:items-start">
             <div className="space-y-4">
               {cards.map((c) => (
-                <InfoLift key={c.title} {...c} />
+                <InfoCard key={c.title} {...c} />
               ))}
             </div>
 
-            <form onSubmit={send} className="glass relative rounded-3xl border border-[var(--glass-border)] p-6 sm:p-8">
-              <Field id="nm" label="Name" value={name} onChange={setName} />
-              <Field id="em" label="Email" type="email" value={email} onChange={setEmail} />
-              <Field id="msg" label="Message" textarea value={message} onChange={setMessage} />
+            <form
+              onSubmit={send}
+              className="glass relative rounded-3xl border border-[var(--glass-border)] bg-[var(--bg)]/70 p-6 sm:p-8 shadow-[0_8px_32px_rgba(0,0,0,0.2)]"
+            >
+              <h3 className="font-display text-xl font-bold text-[var(--text)] mb-6">Send a Message</h3>
+              <Field id="contact-name" label="Your Name" value={name} onChange={setName} />
+              <Field id="contact-email" label="Your Email" type="email" value={email} onChange={setEmail} />
+              <Field id="contact-msg" label="Your Message" textarea value={message} onChange={setMessage} />
 
               <motion.button
                 type="submit"
                 disabled={sending}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.97 }}
-                className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--neon)]/40 bg-gradient-to-r from-[var(--neon)]/20 to-[var(--electric)]/20 py-3.5 text-sm font-bold text-[var(--text)] shadow-[0_0_28px_rgba(0,255,157,0.12)] transition disabled:opacity-60"
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
+                className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl border border-[var(--neon)]/50 bg-gradient-to-r from-[var(--neon)]/20 via-[var(--neon)]/15 to-[var(--electric)]/20 py-3.5 text-sm font-bold text-[var(--text)] shadow-[0_0_24px_rgba(0,255,157,0.15)] transition-all duration-300 hover:border-[var(--neon)] hover:shadow-[0_0_36px_rgba(0,255,157,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon)] disabled:opacity-60"
               >
                 <motion.span
-                  animate={sending ? { x: [0, 6, 0], rotate: [0, 12, 0] } : {}}
-                  transition={{ duration: 0.6, repeat: sending ? Infinity : 0 }}
+                  animate={sending ? { rotate: [0, 360] } : {}}
+                  transition={{ duration: 1, repeat: sending ? Infinity : 0, ease: 'linear' }}
                   className="inline-flex"
                 >
-                  <Send size={18} className="text-[var(--neon)]" />
+                  <Send size={16} className="text-[var(--neon)]" />
                 </motion.span>
-                Send 🚀
+                <span>{sending ? 'Transmitting…' : 'Send Message 🚀'}</span>
               </motion.button>
             </form>
           </div>
@@ -125,16 +157,21 @@ export default function Contact() {
         <AnimatePresence>
           {toast && (
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 12 }}
-              className={`fixed bottom-8 left-1/2 z-[12000] w-[min(90vw,380px)] -translate-x-1/2 rounded-2xl border px-5 py-4 text-center text-sm font-semibold shadow-xl backdrop-blur-xl ${
+              exit={{ opacity: 0, y: 15 }}
+              className={`fixed bottom-8 left-1/2 z-[12000] flex w-[min(90vw,420px)] -translate-x-1/2 items-center gap-3 rounded-2xl border px-5 py-4 text-sm font-semibold shadow-2xl backdrop-blur-2xl ${
                 toast.type === 'success'
-                  ? 'border-[var(--neon)]/40 bg-[var(--bg)]/90 text-[var(--neon)]'
-                  : 'border-red-400/40 bg-[var(--bg)]/90 text-red-300'
+                  ? 'border-[var(--neon)]/50 bg-[var(--bg)]/95 text-[var(--neon)] shadow-[0_0_30px_rgba(0,255,157,0.2)]'
+                  : 'border-red-400/50 bg-[var(--bg)]/95 text-red-300 shadow-[0_0_30px_rgba(248,113,113,0.2)]'
               }`}
             >
-              {toast.text}
+              {toast.type === 'success' ? (
+                <CheckCircle2 size={20} className="shrink-0 text-[var(--neon)]" />
+              ) : (
+                <AlertCircle size={20} className="shrink-0 text-red-400" />
+              )}
+              <span>{toast.text}</span>
             </motion.div>
           )}
         </AnimatePresence>
@@ -143,52 +180,44 @@ export default function Contact() {
   )
 }
 
-function InfoLift({ icon: Icon, title, value, href }) {
-  const ref = useRef(null)
-  const onMove = (e) => {
-    const el = ref.current
-    if (!el) return
-    const r = el.getBoundingClientRect()
-    const x = (e.clientX - r.left - r.width / 2) * 0.06
-    const y = (e.clientY - r.top - r.height / 2) * 0.06
-    el.style.transform = `translate(${x}px, ${y}px) translateY(-4px)`
-  }
-  const onLeave = () => {
-    const el = ref.current
-    if (!el) return
-    el.style.transform = 'translate(0,0)'
-  }
-
-  const inner = (
-    <div
-      ref={ref}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      className="glass flex items-start gap-4 rounded-2xl border border-[var(--glass-border)] p-5 transition-shadow duration-300 hover:shadow-[0_16px_50px_rgba(0,0,0,0.35)]"
-    >
-      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[var(--neon)]/10 text-[var(--neon)] ring-1 ring-[var(--neon)]/25">
-        <Icon size={22} />
-      </span>
-      <div>
-        <p className="text-xs font-bold uppercase tracking-wider text-[var(--electric)]">{title}</p>
-        <p className="mt-1 break-all text-sm text-[var(--text)]">{value}</p>
+function InfoCard({ icon: Icon, title, value, href, hint }) {
+  const content = (
+    <div className="glass flex items-center justify-between rounded-2xl border border-[var(--glass-border)] bg-[var(--bg)]/70 p-5 transition-all duration-300 hover:border-[var(--neon)]/35 hover:shadow-[0_8px_30px_rgba(0,0,0,0.25)]">
+      <div className="flex items-center gap-4">
+        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[var(--neon)]/10 text-[var(--neon)] ring-1 ring-[var(--neon)]/25">
+          <Icon size={20} />
+        </span>
+        <div>
+          <p className="text-xs font-bold uppercase tracking-wider text-[var(--electric)]">{title}</p>
+          <p className="mt-0.5 break-all text-sm font-medium text-[var(--text)]">{value}</p>
+        </div>
       </div>
+      {hint && (
+        <span className="hidden sm:block text-[11px] font-medium text-[var(--text-muted)] opacity-60">
+          {hint}
+        </span>
+      )}
     </div>
   )
 
   if (href) {
     return (
-      <a href={href} target="_blank" rel="noreferrer" className="block">
-        {inner}
+      <a
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+        className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon)] rounded-2xl"
+      >
+        {content}
       </a>
     )
   }
-  return inner
+  return content
 }
 
 function Field({ id, label, type = 'text', textarea, value, onChange }) {
   const common =
-    'peer w-full rounded-xl border border-[var(--glass-border)] bg-[var(--bg)]/40 px-4 text-[var(--text)] outline-none transition focus:border-[var(--neon)]/50 focus:ring-2 focus:ring-[var(--neon)]/20'
+    'peer w-full rounded-xl border border-[var(--glass-border)] bg-[var(--bg)]/50 px-4 text-[var(--text)] outline-none transition-all duration-200 focus:border-[var(--neon)]/60 focus:ring-2 focus:ring-[var(--neon)]/20'
 
   return (
     <div className="relative mb-5">
@@ -215,7 +244,7 @@ function Field({ id, label, type = 'text', textarea, value, onChange }) {
       )}
       <label
         htmlFor={id}
-        className="pointer-events-none absolute left-4 top-3.5 origin-left text-sm text-[var(--text-muted)] transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:-translate-y-2 peer-focus:scale-90 peer-focus:text-[var(--neon)] peer-[:not(:placeholder-shown)]:-translate-y-2 peer-[:not(:placeholder-shown)]:scale-90"
+        className="pointer-events-none absolute left-4 top-3.5 origin-left text-sm text-[var(--text-muted)] transition-all duration-200 peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:-translate-y-2.5 peer-focus:scale-85 peer-focus:text-[var(--neon)] peer-[:not(:placeholder-shown)]:-translate-y-2.5 peer-[:not(:placeholder-shown)]:scale-85"
       >
         {label}
       </label>
