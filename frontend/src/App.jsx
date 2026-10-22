@@ -8,7 +8,6 @@ import Projects from './components/Projects.jsx'
 import GitHubStats from './components/GitHubStats.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
-import CustomCursor from './components/CustomCursor.jsx'
 import Loader from './components/Loader.jsx'
 
 function readStoredTheme() {
@@ -108,7 +107,6 @@ export default function App() {
       />
 
       <Loader done={loaderDone} />
-      {loaderDone && <CustomCursor />}
 
       <Navbar theme={theme} toggleTheme={toggleTheme} />
 

@@ -47,12 +47,6 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-@media (pointer: fine) {
-  body.has-custom-cursor {
-    cursor: none;
-  }
-}
-
 /* Subtle background film grain */
 .grain::before {
   content: '';
