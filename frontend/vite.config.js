@@ -8,11 +8,11 @@ export default defineConfig({
     modulePreload: false,
   },
   server: {
+    host: true,
     port: 5173,
-    open: true,
   },
   preview: {
+    host: true,
     port: 5501,
-    open: true,
   },
 })
