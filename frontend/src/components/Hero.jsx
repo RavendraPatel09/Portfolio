@@ -7,10 +7,10 @@ import HangingIdCard from './HangingIdCard.jsx'
 const HeroScene = lazy(() => import('./HeroScene.jsx'))
 
 const ROLES = [
-  'Software Developer 💻',
-  'Full-Stack & Systems Builder ⚙️',
-  'Problem Solver & DSA Enthusiast ⚡',
-  'Curious Learner & Builder 🚀',
+  'Full Stack Development',
+  'AI & Data Exploration',
+  'Backend Engineering',
+  'Problem Solving',
 ]
 
 function HeroBgFallback() {
@@ -70,13 +70,15 @@ function MagneticPrimaryCTA({ children, onClick }) {
   )
 }
 
-function MagneticSecondaryCTA({ children, href, download }) {
+function MagneticSecondaryCTA({ children, href, download, target, rel }) {
   const { ref, onMouseMove, onMouseLeave } = useMagnetic(0.25)
   return (
     <span ref={ref} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} className="inline-block">
       <motion.a
         href={href}
         download={download}
+        target={target}
+        rel={rel}
         whileHover={{ scale: 1.03 }}
         whileTap={{ scale: 0.98 }}
         className="glass group inline-flex items-center gap-2 rounded-xl border border-[var(--glass-border)] bg-[var(--bg)]/40 px-7 py-3.5 text-sm font-semibold text-[var(--text)] transition-all duration-300 hover:border-[var(--electric)]/40 hover:text-[var(--electric)] hover:shadow-[0_0_24px_rgba(0,180,255,0.15)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--electric)]"
@@ -148,25 +150,34 @@ export default function Hero() {
             <span className="font-mono text-sm font-semibold text-[var(--electric)]">@RavendraPatel09</span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--neon)]/30 bg-[var(--neon)]/10 px-3 py-1 text-xs font-semibold text-[var(--neon)]">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--neon)]" />
-              CS Undergrad · OIST Bhopal &apos;28
+              B.Tech CSE (Data Science) · OIST &apos;28
             </span>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+            className="font-display text-lg sm:text-xl font-medium text-[var(--neon)]"
+          >
+            Hi, I&apos;m Ravendra Patel 👋
           </motion.div>
 
           <motion.h1
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="glitch font-display text-4xl font-bold leading-tight tracking-tight text-[var(--text)] sm:text-5xl md:text-6xl lg:text-7xl"
-            data-text={"Hi, I'm Ravendra Patel 👋"}
+            className="glitch mt-1.5 font-display text-3xl font-bold leading-tight tracking-tight text-[var(--text)] sm:text-5xl md:text-6xl lg:text-[4rem]"
+            data-text="Aspiring Full Stack Developer & AI Enthusiast"
           >
-            Hi, I&apos;m Ravendra Patel 👋
+            Aspiring Full Stack Developer &amp; <span className="text-[var(--neon)]">AI Enthusiast</span>
           </motion.h1>
 
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-5 min-h-[2.5rem] font-display text-xl font-medium text-[var(--text-muted)] sm:text-2xl md:text-3xl"
+            className="mt-4 min-h-[2.5rem] font-display text-xl font-medium text-[var(--text-muted)] sm:text-2xl md:text-3xl"
           >
             <Typewriter />
           </motion.div>
@@ -177,7 +188,7 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="mt-3.5 max-w-2xl text-base leading-relaxed text-[var(--text-muted)] sm:text-lg md:text-xl"
           >
-            Building scalable applications, understanding system internals, and solving algorithmic problems. Passionate about engineering systems that connect intuitive frontends to robust backends.
+            I’m a Computer Science and Engineering undergraduate specializing in Data Science, with hands-on experience building web applications and backend systems using Python, C++, and JavaScript. I’m exploring AI-driven applications, agentic tools, and data engineering while strengthening my problem-solving and software development skills.
           </motion.p>
 
           <motion.div
@@ -186,8 +197,13 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="mt-7 flex flex-wrap items-center gap-4"
           >
-            <MagneticPrimaryCTA onClick={goProjects}>View My Work</MagneticPrimaryCTA>
-            <MagneticSecondaryCTA href="./resume.pdf" download>
+            <MagneticPrimaryCTA onClick={goProjects}>Explore My Projects</MagneticPrimaryCTA>
+            <MagneticSecondaryCTA
+              href="./resume.pdf"
+              download="Ravendra_Patel_Resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Download Resume
             </MagneticSecondaryCTA>
           </motion.div>

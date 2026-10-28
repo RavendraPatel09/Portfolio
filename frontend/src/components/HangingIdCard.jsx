@@ -535,13 +535,22 @@ export default function HangingIdCard() {
                   </span>
                 </div>
 
-                {/* Institution & Year */}
+                {/* Major Field of Study */}
                 <p
-                  className={`mt-2 text-[10px] font-medium transition-colors duration-300 ${
-                    isLight ? 'text-slate-600' : 'text-slate-400'
+                  className={`mt-2 text-[10px] font-semibold transition-colors duration-300 leading-tight ${
+                    isLight ? 'text-slate-700' : 'text-slate-300'
                   }`}
                 >
-                  CS Engineering · OIST Bhopal &apos;28
+                  Computer Science &amp; Engineering (Data Science)
+                </p>
+
+                {/* Institution & Class */}
+                <p
+                  className={`mt-1 text-[10px] font-medium transition-colors duration-300 ${
+                    isLight ? 'text-slate-500' : 'text-slate-400'
+                  }`}
+                >
+                  OIST · Class of 2028
                 </p>
               </div>
 
