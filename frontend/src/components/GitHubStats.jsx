@@ -72,43 +72,39 @@ function StatImageCard({ src, alt, className = '', containerClassName = '', fall
 
           <div className="py-4">
             {fallbackType === 'langs' ? (
-              <div className="space-y-2 text-left">
-                <div className="flex justify-between text-xs font-semibold text-[var(--text)]">
-                  <span>C++ / Python / JavaScript / HTML</span>
-                  <span className="text-[var(--neon)]">Core Stack</span>
-                </div>
-                <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-[var(--glass-border)]">
-                  <div className="h-full bg-blue-500" style={{ width: '45%' }} title="C++" />
-                  <div className="h-full bg-emerald-500" style={{ width: '30%' }} title="Python" />
-                  <div className="h-full bg-amber-400" style={{ width: '15%' }} title="JavaScript" />
-                  <div className="h-full bg-sky-400" style={{ width: '10%' }} title="HTML/CSS" />
+              <div className="space-y-3 text-left">
+                <p className="text-xs text-[var(--text-muted)]">
+                  Primary programming languages utilized across project repositories:
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="rounded-lg border border-[var(--glass-border)] bg-[var(--card-bg)] px-3 py-1 text-xs font-semibold text-[var(--neon)]">
+                    Python
+                  </span>
+                  <span className="rounded-lg border border-[var(--glass-border)] bg-[var(--card-bg)] px-3 py-1 text-xs font-semibold text-[var(--electric)]">
+                    C++
+                  </span>
+                  <span className="rounded-lg border border-[var(--glass-border)] bg-[var(--card-bg)] px-3 py-1 text-xs font-semibold text-amber-400">
+                    JavaScript
+                  </span>
                 </div>
               </div>
             ) : fallbackType === 'streak' ? (
-              <div className="grid grid-cols-2 gap-3 text-center">
-                <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-3">
-                  <p className="font-display text-2xl font-bold text-[var(--neon)]">Active</p>
-                  <p className="text-[11px] text-[var(--text-muted)]">Continuous Coding</p>
-                </div>
-                <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-3">
-                  <p className="font-display text-2xl font-bold text-[var(--electric)]">100%</p>
-                  <p className="text-[11px] text-[var(--text-muted)]">Practice Consistency</p>
-                </div>
+              <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-4 text-center">
+                <p className="font-display text-base font-bold text-[var(--electric)]">
+                  Continuous Coding Practice
+                </p>
+                <p className="mt-1 text-xs text-[var(--text-muted)]">
+                  View full commit history and streak metrics on GitHub.
+                </p>
               </div>
             ) : (
-              <div className="grid grid-cols-3 gap-2 text-center">
-                <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-2.5">
-                  <p className="font-display text-lg font-bold text-[var(--neon)]">9+</p>
-                  <p className="text-[10px] text-[var(--text-muted)]">Repositories</p>
-                </div>
-                <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-2.5">
-                  <p className="font-display text-lg font-bold text-[var(--electric)]">40+</p>
-                  <p className="text-[10px] text-[var(--text-muted)]">Commits</p>
-                </div>
-                <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-2.5">
-                  <p className="font-display text-lg font-bold text-[var(--neon)]">Public</p>
-                  <p className="text-[10px] text-[var(--text-muted)]">Open Source</p>
-                </div>
+              <div className="rounded-xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-4 text-center">
+                <p className="font-display text-base font-bold text-[var(--neon)]">
+                  Public Repositories &amp; Code
+                </p>
+                <p className="mt-1 text-xs text-[var(--text-muted)]">
+                  Explore full project repositories and code activity on GitHub.
+                </p>
               </div>
             )}
           </div>
@@ -164,7 +160,7 @@ export default function GitHubStats({ theme: propTheme }) {
               GitHub Insights <span className="text-[var(--electric)]">🌌</span>
             </h2>
             <p className="mx-auto mt-3 max-w-2xl text-[var(--text-muted)] sm:text-lg">
-              Live statistics reflecting continuous coding practice, open-source commits, and technology breakdown.
+              Explore code repositories, commits, and activity directly on GitHub.
             </p>
           </div>
 

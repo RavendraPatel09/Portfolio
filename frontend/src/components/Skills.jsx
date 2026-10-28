@@ -2,7 +2,7 @@ import { useState } from 'react'
 import SectionReveal from './SectionReveal'
 import { skillGroups } from '../data/skills'
 
-function SkillFlipCard({ name, icon, tag, description }) {
+function SkillFlipCard({ name, icon, tag, description, isLearning }) {
   const [flipped, setFlipped] = useState(false)
 
   return (
@@ -27,10 +27,18 @@ function SkillFlipCard({ name, icon, tag, description }) {
         }`}
       >
         {/* Front Face */}
-        <div className="flip-face glass absolute inset-0 flex flex-col items-center justify-between rounded-2xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-5 shadow-[var(--card-shadow)] transition-all duration-300 group-hover:border-[var(--neon)]/40 group-hover:shadow-[0_0_28px_rgba(0,255,157,0.14)]">
+        <div className={`flip-face glass absolute inset-0 flex flex-col items-center justify-between rounded-2xl border p-5 shadow-[var(--card-shadow)] transition-all duration-300 group-hover:border-[var(--neon)]/40 group-hover:shadow-[0_0_28px_rgba(0,255,157,0.14)] ${
+          isLearning
+            ? 'border-amber-500/30 bg-[var(--card-bg)]'
+            : 'border-[var(--glass-border)] bg-[var(--card-bg)]'
+        }`}>
           <div className="flex w-full items-center justify-between">
-            <span className="inline-block rounded-full border border-[var(--glass-border)] bg-[var(--chip-bg)] px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[var(--electric)]">
-              Core
+            <span className={`inline-block rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${
+              isLearning
+                ? 'border-amber-500/40 bg-amber-500/10 text-amber-400'
+                : 'border-[var(--glass-border)] bg-[var(--chip-bg)] text-[var(--electric)]'
+            }`}>
+              {isLearning ? 'Learning' : 'Core'}
             </span>
             <span className="text-[10px] text-[var(--text-muted)] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
               Flip ↺
@@ -83,10 +91,10 @@ export default function Skills() {
               Technical Stack
             </span>
             <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl md:text-5xl">
-              Engineering Arsenal <span className="text-[var(--neon)]">🛠️</span>
+              Technical Skills &amp; <span className="text-[var(--neon)]">Tooling</span> 🛠️
             </h2>
             <p className="mx-auto mt-3 max-w-2xl text-[var(--text-muted)] sm:text-lg">
-              Practical languages, frameworks, databases, and architectural concepts I use to engineer reliable systems.
+              Structured technical foundations across programming languages, web engineering, databases, and AI development—distinguishing core proficiencies from active learning.
             </p>
           </div>
 
@@ -94,10 +102,21 @@ export default function Skills() {
             {skillGroups.map((g) => (
               <div key={g.title}>
                 <div className="mb-4 flex items-center gap-3">
-                  <h3 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-[var(--electric)]">
+                  <h3 className={`font-display text-xs font-bold uppercase tracking-[0.2em] ${
+                    g.isLearningGroup ? 'text-amber-400' : 'text-[var(--electric)]'
+                  }`}>
                     {g.title}
                   </h3>
-                  <div className="h-[1px] flex-1 bg-gradient-to-r from-[var(--electric)]/30 to-transparent" />
+                  {g.isLearningGroup && (
+                    <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-2.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-amber-400">
+                      In Active Learning
+                    </span>
+                  )}
+                  <div className={`h-[1px] flex-1 bg-gradient-to-r ${
+                    g.isLearningGroup
+                      ? 'from-amber-400/40 to-transparent'
+                      : 'from-[var(--electric)]/30 to-transparent'
+                  }`} />
                 </div>
                 <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                   {g.items.map((it) => (

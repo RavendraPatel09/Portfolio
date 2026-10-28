@@ -27,9 +27,21 @@ function CompactProjectCard({ p }) {
         </div>
 
         {/* Project Description */}
-        <p className="mt-2.5 text-xs sm:text-[13px] leading-relaxed text-[var(--text-muted)] line-clamp-3">
+        <p className="mt-2.5 text-xs sm:text-[13px] leading-relaxed text-[var(--text-muted)]">
           {p.description}
         </p>
+
+        {/* Key Highlights */}
+        {p.highlights && p.highlights.length > 0 && (
+          <ul className="mt-3 space-y-1.5 border-t border-[var(--glass-border)]/50 pt-2.5">
+            {p.highlights.map((h, i) => (
+              <li key={i} className="flex items-start gap-1.5 text-[11px] leading-relaxed text-[var(--text-muted)]">
+                <span className="text-[var(--neon)] mt-0.5 shrink-0 select-none">▹</span>
+                <span>{h}</span>
+              </li>
+            ))}
+          </ul>
+        )}
 
         {/* Technology Stack Chips */}
         <div className="mt-3.5 flex flex-wrap gap-1.5">
@@ -57,8 +69,8 @@ function CompactProjectCard({ p }) {
           <ExternalLink size={11} className="opacity-70" />
         </a>
 
-        <span className="text-[10px] font-mono text-[var(--text-muted)] opacity-60 select-none">
-          Open Source
+        <span className="text-[10px] font-mono text-[var(--text-muted)] opacity-70 select-none">
+          GitHub Project
         </span>
       </div>
     </article>
@@ -100,10 +112,10 @@ export default function Projects() {
               Featured Work
             </span>
             <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl md:text-5xl">
-              Practical Projects &amp; <span className="text-[var(--neon)]">Engineering Practice</span> 🚀
+              Featured Projects &amp; <span className="text-[var(--neon)]">Engineering Work</span> 🚀
             </h2>
             <p className="mx-auto mt-3 max-w-2xl text-[var(--text-muted)] sm:text-lg">
-              Applications, systems, and deep algorithmic repositories built to learn, test, and solve real problems.
+              Applications and backend systems spanning AI-assisted travel planning, automated resume analysis, and municipal infrastructure.
             </p>
           </div>
 

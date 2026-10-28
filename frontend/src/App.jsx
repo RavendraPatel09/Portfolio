@@ -6,6 +6,7 @@ import Hero from './components/Hero.jsx'
 import About from './components/About.jsx'
 import Skills from './components/Skills.jsx'
 import Projects from './components/Projects.jsx'
+import Achievements from './components/Achievements.jsx'
 import GitHubStats from './components/GitHubStats.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
@@ -95,6 +96,7 @@ function MainLayout() {
         <About />
         <Skills />
         <Projects />
+        <Achievements />
         <GitHubStats theme={theme} />
         <Contact />
       </main>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import emailjs from '@emailjs/browser'
-import { Mail, MapPin, Linkedin, Github, Send, CheckCircle2, AlertCircle } from 'lucide-react'
+import { Mail, Linkedin, Github, Send, CheckCircle2, AlertCircle } from 'lucide-react'
 import SectionReveal from './SectionReveal'
 
 const RECIPIENT_EMAIL = 'patelsamerth9@gmail.com'
@@ -24,8 +24,7 @@ export default function Contact() {
 
     // 1. Bot honeypot check (hidden field)
     if (honeypot) {
-      // Silently pretend success to trick automated spam bots
-      setToast({ type: 'success', text: 'Message delivered successfully! 🚀' })
+      setToast({ type: 'success', text: 'Thank you for your submission.' })
       setName('')
       setEmail('')
       setMessage('')
@@ -136,13 +135,6 @@ export default function Contact() {
       value: RECIPIENT_EMAIL,
       href: `mailto:${RECIPIENT_EMAIL}`,
       hint: 'Direct Inbox',
-    },
-    {
-      icon: MapPin,
-      title: 'Location',
-      value: 'Bhopal, Madhya Pradesh, India',
-      href: null,
-      hint: 'Open to remote & onsite',
     },
     {
       icon: Linkedin,

@@ -1,13 +1,13 @@
 import { useRef, useEffect, useState } from 'react'
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
-import { Terminal, Code2, Database, Cpu, MapPin, GraduationCap } from 'lucide-react'
+import { Terminal, Code2, Database, Cpu, GraduationCap, Sparkles } from 'lucide-react'
 import SectionReveal from './SectionReveal'
 
 const STATS = [
-  { label: 'Projects Built', value: 6, suffix: '+' },
-  { label: 'GitHub Repositories', value: 9, suffix: '+' },
-  { label: 'Core Languages', value: 3, suffix: '+' },
-  { label: 'Lines of Code', value: '∞', suffix: '' },
+  { label: 'Hackathons & Events', value: 25, suffix: '+' },
+  { label: 'Hackathon Finalist', value: 4, suffix: 'x' },
+  { label: 'Core Languages', value: 3, suffix: '' },
+  { label: 'Featured Projects', value: 3, suffix: '' },
 ]
 
 const PILLARS = [
@@ -140,17 +140,17 @@ function ProfileCard3D() {
               </div>
             </div>
 
-            {/* Name, Role & Location */}
+            {/* Name & Professional Identity */}
             <div className="min-w-0 flex-1">
               <h3 className="font-display text-xl font-bold tracking-tight text-[var(--text)] sm:text-2xl truncate">
                 Ravendra Patel
               </h3>
               <p className="mt-0.5 text-xs font-semibold text-[var(--electric)] sm:text-sm">
-                Software Developer
+                Aspiring Full Stack Developer
               </p>
-              <div className="mt-1.5 flex items-center gap-1.5 text-xs text-[var(--text-muted)]">
-                <MapPin size={12} className="shrink-0 text-[var(--text-muted)] opacity-80" />
-                <span className="truncate">Bhopal, Madhya Pradesh, India</span>
+              <div className="mt-1.5 flex items-center gap-1.5 text-xs text-[var(--neon)]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--neon)] animate-pulse" />
+                <span className="truncate text-[11px] font-medium text-[var(--text-muted)]">AI &amp; Data Enthusiast</span>
               </div>
             </div>
           </div>
@@ -162,20 +162,23 @@ function ProfileCard3D() {
             <div className="flex items-center gap-1.5">
               <GraduationCap size={13} className="text-[var(--electric)]" />
               <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]">
-                Undergraduate
+                Education
               </span>
             </div>
             <span className="font-mono text-[11px] font-semibold text-[var(--neon)]">
-              2024 – 2028
+              Expected 2028
             </span>
           </div>
 
           <div className="pt-2.5">
             <h4 className="font-display text-sm font-semibold text-[var(--text)] leading-snug">
-              Oriental Institute of Science &amp; Technology
+              Bachelor of Technology (B.Tech)
             </h4>
-            <p className="mt-1 text-xs font-medium text-[var(--electric)]">
-              Computer Science Engineering
+            <p className="mt-0.5 text-xs font-medium text-[var(--electric)]">
+              Computer Science &amp; Engineering (Data Science)
+            </p>
+            <p className="mt-1 text-[11px] text-[var(--text-muted)]">
+              Oriental Institute of Science and Technology
             </p>
           </div>
         </div>
@@ -220,15 +223,18 @@ export default function About() {
               </h2>
 
               <p className="mt-3 text-base font-medium text-[var(--electric)] sm:text-lg">
-                Computer Science Undergraduate @ Oriental Institute of Science and Technology, Bhopal (Graduation 2028)
+                B.Tech in Computer Science &amp; Engineering (Data Science) · Oriental Institute of Science and Technology (Expected 2028)
               </p>
 
               <div className="mt-5 space-y-3.5 text-base leading-relaxed text-[var(--text-muted)]">
                 <p>
-                  I am a passionate software developer fascinated by how things work under the hood. For me, software engineering is not merely about writing syntax—it&apos;s about understanding how data moves through networks, how frontend experiences interface with backend APIs, and how databases maintain consistency.
+                  I am a Computer Science and Engineering undergraduate specializing in Data Science at the Oriental Institute of Science and Technology. I enjoy building practical applications, exploring backend systems, and understanding how software and data work together to solve real-world problems.
                 </p>
                 <p>
-                  I learn most effectively by creating practical projects from scratch, experimenting with new stacks, and systematically debugging issues. Whether writing high-performance algorithms in C++, structuring Python backend services, or implementing interactive React interfaces, I approach engineering with curiosity, patience, and high attention to detail.
+                  My projects span AI-assisted travel planning, resume analysis, and smart-city backend development. Through these projects, I have explored application development, API integration, modular backend architecture, and the practical use of AI tools.
+                </p>
+                <p>
+                  I am continuing to strengthen my foundations in data structures and algorithms, databases, machine learning, and full-stack development. I value hands-on learning, experimentation, and writing software that is understandable, maintainable, and useful.
                 </p>
               </div>
 

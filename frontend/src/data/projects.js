@@ -1,70 +1,54 @@
 export const projects = [
   {
-    id: 'findmystuff',
-    name: 'FindMyStuff',
-    emoji: '🔍',
+    id: 'tripmate',
+    name: 'Tripmate',
+    emoji: '✈️',
+    category: 'AI-Assisted Travel Planning',
+    tech: ['React', 'AI Integration', 'Gemini', 'Wikipedia API', 'Maps Data'],
+    github: 'https://github.com/RavendraPatel09/Tripmate',
     description:
-      'A Lost and Found website for college students. Helps students report lost items or post things they\'ve found so everyone can get their belongings back easily.',
-    tech: ['JavaScript', 'HTML', 'CSS'],
-    github: 'https://github.com/RavendraPatel09/findmystuff',
-    category: 'Web App',
-    span: 'lg',
+      'An AI-powered travel planner that generates personalized itineraries based on users’ budgets, interests, and travel preferences. It provides trip recommendations, food guides, packing lists, and emergency information to help users organize their travel plans.',
+    highlights: [
+      'Personalized travel itinerary generation based on user preferences and travel style',
+      'AI integration using Gemini for smarter, context-aware trip planning',
+      'Wikipedia and Maps data integration for real-world insights and local recommendations',
+    ],
   },
   {
-    id: 'portfolio-flask',
-    name: 'Portfolio Website',
-    emoji: '✨',
+    id: 'ai-resume-analyzer',
+    name: 'AI Resume Analyzer',
+    emoji: '📄',
+    category: 'AI Application',
+    tech: ['Python', 'AI', 'LLM Analysis', 'Prompt Engineering'],
+    github: 'https://github.com/RavendraPatel09',
     description:
-      'Personal portfolio website built with Python & Flask featuring a glassmorphism UI design.',
-    tech: ['Python', 'Flask', 'CSS', 'HTML'],
-    github: 'https://github.com/RavendraPatel09/Portfolio',
-    category: 'Web App',
-    span: 'md',
+      'An AI-powered resume analysis application that evaluates resumes against job descriptions, examines keyword matching and formatting, and provides actionable suggestions for improvement.',
+    highlights: [
+      'Automated resume and job-description keyword comparison',
+      'Formatting and structure evaluation to identify improvement opportunities',
+      'LLM-based actionable feedback to accelerate resume refinement for applicants',
+    ],
   },
   {
-    id: 'library-ms',
-    name: 'Library Management System',
-    emoji: '📚',
+    id: 'smart-bhopal-backend',
+    name: 'Smart Bhopal Backend',
+    emoji: '🏙️',
+    category: 'Backend Engineering',
+    tech: ['Python', 'FastAPI', 'REST APIs', 'IoT Telemetry'],
+    github: 'https://github.com/RavendraPatel09/Smart-Bhopal-Backend',
     description:
-      'A complete library management system built using Python, HTML, CSS and SQL for managing books, members and borrowing records.',
-    tech: ['Python', 'HTML', 'CSS', 'SQL'],
-    github: 'https://github.com/RavendraPatel09/library-management-system',
-    category: 'Full Stack',
-    span: 'lg',
-  },
-  {
-    id: 'dsa-cpp',
-    name: 'Complete DSA in C++',
-    emoji: '⚡',
-    description:
-      'Mastering DSA problem-solving through C++. Modular implementations of core DSA concepts and solutions to competitive programming challenges.',
-    tech: ['C++'],
-    github: 'https://github.com/RavendraPatel09/Complete-DSA-Using-Cpp',
-    category: 'DSA',
-    span: 'sm',
-  },
-  {
-    id: 'dsa-py',
-    name: 'Complete DSA in Python',
-    emoji: '🐍',
-    description:
-      'Beginner to advanced Data Structures and Algorithms in Python with easy-to-understand problem-solving approaches. Includes arrays, linked lists, stacks, queues, trees, graphs, sorting, and searching.',
-    tech: ['Python'],
-    github: 'https://github.com/RavendraPatel09/Complete-DSA-using-python',
-    category: 'DSA',
-    span: 'sm',
-  },
-  {
-    id: 'python-codes',
-    name: 'Python Codes – Basic to Advanced',
-    emoji: '🎯',
-    description:
-      'A collection of Python practice codes covering everything from basic math and logic puzzles to working with images using OpenCV. Perfect for beginners.',
-    tech: ['Python', 'OpenCV'],
-    github: 'https://github.com/RavendraPatel09/Basic_to_advance_python_codes-',
-    category: 'Learning',
-    span: 'md',
+      'A smart-city backend platform for Bhopal focused on civic services, real-time traffic monitoring, utilities management, and analytics.',
+    highlights: [
+      'Modular backend architecture for civic services and municipal data processing',
+      'Unified handling of multiple civic data streams and analytics endpoints',
+      'Scalable telemetry foundation engineered for municipal IoT data ingestion',
+    ],
   },
 ]
 
-export const projectFilters = ['All', 'Web App', 'Full Stack', 'DSA', 'Learning']
+export const projectFilters = [
+  'All',
+  'AI-Assisted Travel Planning',
+  'AI Application',
+  'Backend Engineering',
+]
