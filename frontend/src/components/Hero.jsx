@@ -145,19 +145,6 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-3.5 flex flex-wrap items-center gap-3"
-          >
-            <span className="font-mono text-sm font-semibold text-[var(--electric)]">@RavendraPatel09</span>
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-[var(--neon)]/30 bg-[var(--neon)]/10 px-3 py-1 text-xs font-semibold text-[var(--neon)]">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[var(--neon)]" />
-              B.Tech CSE (Data Science) · OIST &apos;28
-            </span>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
             className="font-display text-lg sm:text-xl font-medium text-[var(--neon)]"
           >
             Hi, I&apos;m Ravendra Patel 👋
