@@ -1,83 +1,55 @@
-import { useState } from 'react'
 import SectionReveal from './SectionReveal'
 import { skillGroups } from '../data/skills'
 
-function SkillFlipCard({ name, icon, tag, description, isLearning }) {
-  const [flipped, setFlipped] = useState(false)
-
+function SkillCard({ name, icon, tag, description, isLearning }) {
   return (
-    <div
-      role="button"
+    <article
       tabIndex={0}
-      onClick={() => setFlipped((f) => !f)}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault()
-          setFlipped((f) => !f)
-        }
-      }}
-      className={`flip-card group relative h-40 sm:h-44 cursor-pointer select-none outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon)] rounded-2xl ${
-        flipped ? 'is-flipped' : ''
+      className={`group relative flex h-full min-h-[220px] w-full flex-col justify-between rounded-2xl border p-4 sm:p-5 transition-all duration-300 hover:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--neon)] ${
+        isLearning
+          ? 'border-amber-500/30 bg-[var(--card-bg)] shadow-[var(--card-shadow)] hover:border-amber-400/50 hover:shadow-[0_0_24px_rgba(251,191,36,0.12)]'
+          : 'border-[var(--glass-border)] bg-[var(--card-bg)] shadow-[var(--card-shadow)] hover:border-[var(--neon)]/40 hover:shadow-[0_0_24px_rgba(0,255,157,0.12)]'
       }`}
-      aria-label={`${name} skill card. Press to view practical experience.`}
+      aria-label={`${name} skill`}
     >
-      <div
-        className={`flip-card-inner relative h-full w-full rounded-2xl transition-transform duration-500 [transform-style:preserve-3d] ${
-          flipped ? '[transform:rotateY(180deg)]' : ''
-        }`}
-      >
-        {/* Front Face */}
-        <div className={`flip-face glass absolute inset-0 flex flex-col items-center justify-between rounded-2xl border p-5 shadow-[var(--card-shadow)] transition-all duration-300 group-hover:border-[var(--neon)]/40 group-hover:shadow-[0_0_28px_rgba(0,255,157,0.14)] ${
-          isLearning
-            ? 'border-amber-500/30 bg-[var(--card-bg)]'
-            : 'border-[var(--glass-border)] bg-[var(--card-bg)]'
-        }`}>
-          <div className="flex w-full items-center justify-between">
-            <span className={`inline-block rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${
-              isLearning
-                ? 'border-amber-500/40 bg-amber-500/10 text-amber-400'
-                : 'border-[var(--glass-border)] bg-[var(--chip-bg)] text-[var(--electric)]'
-            }`}>
-              {isLearning ? 'Learning' : 'Core'}
-            </span>
-            <span className="text-[10px] text-[var(--text-muted)] opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-              Flip ↺
-            </span>
-          </div>
+      {/* 1. Category badge at the top */}
+      <div className="flex w-full items-center justify-between gap-2">
+        <span
+          className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${
+            isLearning
+              ? 'border-amber-500/40 bg-amber-500/10 text-amber-400'
+              : 'border-[var(--glass-border)] bg-[var(--chip-bg)] text-[var(--electric)]'
+          }`}
+        >
+          {tag || (isLearning ? 'Learning' : 'Core')}
+        </span>
 
-          <div className="flex flex-col items-center text-center">
-            {icon ? (
-              <span className="text-3xl transition-transform duration-300 group-hover:scale-110 sm:text-4xl">
-                {icon}
-              </span>
-            ) : (
-              <span className="font-mono text-2xl font-bold text-[var(--neon)]">{name}</span>
-            )}
-            <p className="mt-2.5 font-display text-base font-bold text-[var(--text)] sm:text-lg">{name}</p>
-          </div>
-
-          <p className="line-clamp-1 w-full text-center text-[11px] font-medium text-[var(--text-muted)]">
-            {tag}
-          </p>
-        </div>
-
-        {/* Back Face */}
-        <div className="flip-face flip-back glass absolute inset-0 flex flex-col justify-between rounded-2xl border border-[var(--neon)]/40 bg-gradient-to-br from-[var(--neon)]/10 via-[var(--card-bg)] to-[var(--electric)]/10 p-5 shadow-[var(--card-shadow)] backdrop-blur-xl [transform:rotateY(180deg)]">
-          <div className="flex items-center justify-between border-b border-[var(--glass-border)] pb-2">
-            <span className="font-display text-sm font-bold text-[var(--neon)]">{name}</span>
-            <span className="text-[10px] uppercase tracking-wider text-[var(--electric)]">{tag}</span>
-          </div>
-
-          <p className="my-auto text-xs leading-relaxed text-[var(--text)] sm:text-[13px]">
-            {description}
-          </p>
-
-          <p className="text-right text-[10px] font-medium text-[var(--text-muted)]">
-            Click to return
-          </p>
-        </div>
+        {isLearning && (
+          <span className="flex items-center gap-1 text-[9px] font-mono text-amber-400/80">
+            <span className="h-1.5 w-1.5 rounded-full bg-amber-400 animate-pulse" />
+            Active
+          </span>
+        )}
       </div>
-    </div>
+
+      {/* 2. Icon in a consistent visual position (centered) */}
+      <div className="my-2.5 flex items-center justify-center">
+        <span className="flex h-12 w-12 items-center justify-center rounded-2xl border border-[var(--glass-border)] bg-[var(--chip-bg)] text-2xl transition-transform duration-300 group-hover:scale-110 sm:text-3xl">
+          {icon}
+        </span>
+      </div>
+
+      {/* 3. Skill title with controlled wrapping & 4. Short description below */}
+      <div className="flex flex-1 flex-col items-center justify-between text-center">
+        <h4 className="font-display text-sm font-bold tracking-tight text-[var(--text)] sm:text-[15px] [overflow-wrap:anywhere] break-words hyphens-auto leading-snug transition-colors duration-200 group-hover:text-[var(--neon)]">
+          {name}
+        </h4>
+
+        <p className="mt-2 text-[11px] leading-relaxed text-[var(--text-muted)] sm:text-xs [overflow-wrap:anywhere] break-words">
+          {description}
+        </p>
+      </div>
+    </article>
   )
 }
 
@@ -102,9 +74,11 @@ export default function Skills() {
             {skillGroups.map((g) => (
               <div key={g.title}>
                 <div className="mb-4 flex items-center gap-3">
-                  <h3 className={`font-display text-xs font-bold uppercase tracking-[0.2em] ${
-                    g.isLearningGroup ? 'text-amber-400' : 'text-[var(--electric)]'
-                  }`}>
+                  <h3
+                    className={`font-display text-xs font-bold uppercase tracking-[0.2em] ${
+                      g.isLearningGroup ? 'text-amber-400' : 'text-[var(--electric)]'
+                    }`}
+                  >
                     {g.title}
                   </h3>
                   {g.isLearningGroup && (
@@ -112,15 +86,17 @@ export default function Skills() {
                       In Active Learning
                     </span>
                   )}
-                  <div className={`h-[1px] flex-1 bg-gradient-to-r ${
-                    g.isLearningGroup
-                      ? 'from-amber-400/40 to-transparent'
-                      : 'from-[var(--electric)]/30 to-transparent'
-                  }`} />
+                  <div
+                    className={`h-[1px] flex-1 bg-gradient-to-r ${
+                      g.isLearningGroup
+                        ? 'from-amber-400/40 to-transparent'
+                        : 'from-[var(--electric)]/30 to-transparent'
+                    }`}
+                  />
                 </div>
-                <div className="grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+                <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 sm:gap-4">
                   {g.items.map((it) => (
-                    <SkillFlipCard key={it.name} {...it} />
+                    <SkillCard key={it.name} {...it} />
                   ))}
                 </div>
               </div>

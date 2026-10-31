@@ -113,7 +113,7 @@ export const skillGroups = [
         description: 'Core mathematical concepts underpinning data distributions, inference, and machine learning models.',
       },
       {
-        name: 'Supervised & Unsupervised Learning',
+        name: 'Machine Learning Fundamentals',
         icon: '🧠',
         tag: 'ML Fundamentals',
         description: 'Foundations of classification, regression, clustering algorithms, and model evaluation techniques.',

@@ -97,6 +97,19 @@ function ProfileCard3D() {
     my.set(0)
   }
 
+  const technicalFocus = [
+    'Full-Stack Development',
+    'Backend Engineering',
+    'AI & Generative AI',
+    'Data Science',
+  ]
+
+  const currentlyExploring = [
+    'Machine Learning',
+    'Agentic AI',
+    'System Design',
+  ]
+
   return (
     <motion.div
       ref={ref}
@@ -109,9 +122,9 @@ function ProfileCard3D() {
       <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[var(--neon)]/30 via-[var(--electric)]/20 to-transparent opacity-60 blur-md transition-opacity duration-300 hover:opacity-90" />
 
       {/* Main card body with natural, content-driven height */}
-      <div className="glass relative flex flex-col rounded-3xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-6 sm:p-7 shadow-[var(--card-shadow)] backdrop-blur-xl transition-colors duration-300">
+      <div className="glass relative flex flex-col rounded-3xl border border-[var(--glass-border)] bg-[var(--card-bg)] p-5 sm:p-6 shadow-[var(--card-shadow)] backdrop-blur-xl transition-colors duration-300">
         {/* A. COMPACT HEADER */}
-        <div className="flex items-center justify-between border-b border-[var(--glass-border)] pb-3.5">
+        <div className="flex items-center justify-between border-b border-[var(--glass-border)] pb-3">
           <div className="flex items-center gap-2">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--neon)] opacity-75" />
@@ -128,59 +141,107 @@ function ProfileCard3D() {
         </div>
 
         {/* B. MAIN IDENTITY AREA */}
-        <div className="py-5">
-          <div className="flex items-center gap-4">
+        <div className="py-3.5">
+          <div className="flex items-center gap-3.5">
             {/* Refined RP Monogram Emblem */}
-            <div className="relative flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-[var(--neon)]/30 bg-gradient-to-br from-[var(--neon)]/15 via-[var(--neon)]/5 to-[var(--electric)]/15 shadow-inner ring-1 ring-[var(--neon)]/20">
-              <span className="font-display text-2xl font-bold tracking-tight text-[var(--neon)]">
+            <div className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[var(--neon)]/30 bg-gradient-to-br from-[var(--neon)]/15 via-[var(--neon)]/5 to-[var(--electric)]/15 shadow-inner ring-1 ring-[var(--neon)]/20">
+              <span className="font-display text-xl font-bold tracking-tight text-[var(--neon)]">
                 RP
               </span>
-              <div className="absolute -bottom-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full border border-[var(--glass-border)] bg-[var(--card-bg)] shadow-sm">
+              <div className="absolute -bottom-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full border border-[var(--glass-border)] bg-[var(--card-bg)] shadow-sm">
                 <span className="h-1.5 w-1.5 rounded-full bg-[var(--electric)]" />
               </div>
             </div>
 
             {/* Name & Professional Identity */}
             <div className="min-w-0 flex-1">
-              <h3 className="font-display text-xl font-bold tracking-tight text-[var(--text)] sm:text-2xl truncate">
+              <h3 className="font-display text-lg font-bold tracking-tight text-[var(--text)] sm:text-xl truncate">
                 Ravendra Patel
               </h3>
-              <p className="mt-0.5 text-xs font-semibold text-[var(--electric)] sm:text-sm">
+              <p className="mt-0.5 text-xs font-semibold text-[var(--electric)]">
                 Aspiring Full Stack Developer
               </p>
-              <div className="mt-1.5 flex items-center gap-1.5 text-xs text-[var(--neon)]">
+              <div className="mt-1 flex items-center gap-1.5 text-xs text-[var(--neon)]">
                 <span className="h-1.5 w-1.5 rounded-full bg-[var(--neon)] animate-pulse" />
-                <span className="truncate text-[11px] font-medium text-[var(--text-muted)]">AI &amp; Data Enthusiast</span>
+                <span className="truncate text-[10.5px] font-medium text-[var(--text-muted)]">AI &amp; Data Enthusiast</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* C. REFINED EDUCATION AREA */}
-        <div className="rounded-2xl border border-[var(--glass-border)] bg-[var(--chip-bg)] p-4 transition-colors duration-200">
+        <div className="rounded-2xl border border-[var(--glass-border)] bg-[var(--chip-bg)] p-3.5 transition-colors duration-200">
           <div className="flex items-center justify-between pb-2 border-b border-[var(--glass-border)]/60">
             <div className="flex items-center gap-1.5">
               <GraduationCap size={13} className="text-[var(--electric)]" />
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[var(--text-muted)]">
+              <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--text-muted)]">
                 Education
               </span>
             </div>
-            <span className="font-mono text-[11px] font-semibold text-[var(--neon)]">
+            <span className="font-mono text-[10px] font-semibold text-[var(--neon)]">
               Expected 2028
             </span>
           </div>
 
-          <div className="pt-2.5">
-            <h4 className="font-display text-sm font-semibold text-[var(--text)] leading-snug">
+          <div className="pt-2">
+            <h4 className="font-display text-xs font-semibold text-[var(--text)] leading-snug">
               Bachelor of Technology (B.Tech)
             </h4>
-            <p className="mt-0.5 text-xs font-medium text-[var(--electric)]">
+            <p className="mt-0.5 text-[11px] font-medium text-[var(--electric)]">
               Computer Science &amp; Engineering (Data Science)
             </p>
-            <p className="mt-1 text-[11px] text-[var(--text-muted)]">
+            <p className="mt-1 text-[10px] text-[var(--text-muted)]">
               Oriental Institute of Science and Technology
             </p>
           </div>
+        </div>
+
+        {/* D. TECHNICAL FOCUS */}
+        <div className="mt-3.5">
+          <div className="flex items-center gap-1.5 pb-2">
+            <Code2 size={12} className="text-[var(--neon)]" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--text-muted)]">
+              Technical Focus
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {technicalFocus.map((skill) => (
+              <span
+                key={skill}
+                className="inline-flex items-center rounded-lg border border-[var(--glass-border)] bg-[var(--chip-bg)] px-2.5 py-1 text-[10.5px] font-medium text-[var(--text)] transition-colors duration-200 hover:border-[var(--neon)]/40 hover:text-[var(--neon)]"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* E. CURRENTLY EXPLORING */}
+        <div className="mt-3">
+          <div className="flex items-center gap-1.5 pb-2">
+            <Sparkles size={12} className="text-[var(--electric)]" />
+            <span className="text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--text-muted)]">
+              Currently Exploring
+            </span>
+          </div>
+          <div className="flex flex-wrap gap-1.5">
+            {currentlyExploring.map((item) => (
+              <span
+                key={item}
+                className="inline-flex items-center rounded-lg border border-[var(--electric)]/25 bg-[var(--electric)]/5 px-2.5 py-1 text-[10.5px] font-medium text-[var(--electric)] transition-colors duration-200 hover:border-[var(--electric)]/45"
+              >
+                <span className="mr-1.5 h-1 w-1 rounded-full bg-[var(--electric)]" />
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* F. CARD FOOTER */}
+        <div className="mt-4 border-t border-[var(--glass-border)]/70 pt-3 text-center">
+          <p className="font-mono text-[9px] font-semibold tracking-[0.24em] text-[var(--text-muted)] uppercase select-none">
+            BUILD <span className="text-[var(--neon)]">•</span> EXPLORE <span className="text-[var(--electric)]">•</span> ENGINEER
+          </p>
         </div>
       </div>
     </motion.div>
