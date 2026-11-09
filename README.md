@@ -1,13 +1,21 @@
 # Ravendra Patel — Developer Portfolio
 
-Premium **React + Vite** portfolio with **Three.js**, **Framer Motion**, **Lenis**, **Tailwind CSS**, and **EmailJS**.
+Premium React + Vite portfolio featuring 3D visuals, scroll-based animations, and a working contact form.
 
-The React app and its Vite configuration live in `frontend/`. Backend-related files
-live in `backend/`; the existing Python file there is compiled bytecode, not source.
+**Tech:** React, Vite, Three.js, Framer Motion, Lenis (smooth scroll), Tailwind CSS, EmailJS
 
-## Run the site (important)
+---
 
-This is **not** plain HTML. **Go Live alone on the project root will show a black screen** because the browser cannot run the app entry point without Vite.
+## Project Structure
+
+- `frontend/` — the React app and Vite configuration (this is where you run all commands)
+- `backend/` — reserved for future backend use; currently contains no active source (the existing Python file is compiled bytecode, not source)
+
+---
+
+## Running the site
+
+> ⚠️ This is a Vite app, not static HTML. Opening the project root with "Go Live" or directly in a browser will show a **black screen** — the browser can't resolve the app entry point without Vite running.
 
 ### Option A — Development (recommended)
 
@@ -16,36 +24,46 @@ npm install --prefix frontend
 npm --prefix frontend run dev
 ```
 
-Opens **http://localhost:5173** with hot reload.
+Runs at **http://localhost:5173** with hot reload.
 
-### Option B — Production preview (after build)
+### Option B — Production preview
 
 ```bash
 npm --prefix frontend run build
 npm --prefix frontend run preview
 ```
 
-Or one command:
+Or, as a single command:
 
 ```bash
 npm --prefix frontend start
 ```
 
-Opens **http://localhost:5501** serving `frontend/dist/` correctly.
+Serves the built app from `frontend/dist/` at **http://localhost:5501**.
 
-### VS Code Go Live
+### Using VS Code's "Go Live"
 
-Only works **after** building, with Live Server root set to `frontend/dist` (see `.vscode/settings.json`):
+Only works *after* a production build, with the Live Server root set to `frontend/dist` (already configured in `.vscode/settings.json`):
 
 1. `npm --prefix frontend run build`
 2. Click **Go Live**
 
-Better: use **Terminal → Run Task → Dev server (hot reload)** or **Run portfolio (build + preview)**.
+For a smoother experience, use VS Code's **Terminal → Run Task** menu instead:
+- **Dev server (hot reload)**
+- **Run portfolio (build + preview)**
 
-## EmailJS
+---
 
-Copy `frontend/.env.example` to `frontend/.env` and add your EmailJS keys.
+## Environment setup
 
-## Resume
+### Contact form (EmailJS)
 
-Add `frontend/public/resume.pdf` for the Download Resume button.
+```bash
+cp frontend/.env.example frontend/.env
+```
+
+Then add your EmailJS service ID, template ID, and public key to `frontend/.env`.
+
+### Resume download
+
+Place your resume PDF at:
