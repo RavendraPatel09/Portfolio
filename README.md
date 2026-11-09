@@ -1,69 +1,36 @@
 # Ravendra Patel — Developer Portfolio
 
-Premium React + Vite portfolio featuring 3D visuals, scroll-based animations, and a working contact form.
+> A performance-focused, visually rich developer portfolio built with React, Vite, and Three.js — featuring real-time 3D interactions, scroll-driven motion design, and a functional contact pipeline.
 
-**Tech:** React, Vite, Three.js, Framer Motion, Lenis (smooth scroll), Tailwind CSS, EmailJS
-
----
-
-## Project Structure
-
-- `frontend/` — the React app and Vite configuration (this is where you run all commands)
-- `backend/` — reserved for future backend use; currently contains no active source (the existing Python file is compiled bytecode, not source)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=flat&logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-Build_Tool-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Three.js](https://img.shields.io/badge/Three.js-3D_Graphics-000000?style=flat&logo=three.js&logoColor=white)](https://threejs.org/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-Animations-0055FF?style=flat&logo=framer&logoColor=white)](https://www.framer.com/motion/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-Styling-06B6D4?style=flat&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
 ---
 
-## Running the site
+## Overview
 
-> ⚠️ This is a Vite app, not static HTML. Opening the project root with "Go Live" or directly in a browser will show a **black screen** — the browser can't resolve the app entry point without Vite running.
+This repository hosts the source for my personal developer portfolio — a single-page application designed to present my projects, skills, and background through an interactive, motion-first interface rather than a static page. It's built as a real Vite-powered React app (not static HTML), which enables 3D rendering, physics-based scroll behavior, and component-driven architecture.
 
-### Option A — Development (recommended)
-
-```bash
-npm install --prefix frontend
-npm --prefix frontend run dev
-```
-
-Runs at **http://localhost:5173** with hot reload.
-
-### Option B — Production preview
-
-```bash
-npm --prefix frontend run build
-npm --prefix frontend run preview
-```
-
-Or, as a single command:
-
-```bash
-npm --prefix frontend start
-```
-
-Serves the built app from `frontend/dist/` at **http://localhost:5501**.
-
-### Using VS Code's "Go Live"
-
-Only works *after* a production build, with the Live Server root set to `frontend/dist` (already configured in `.vscode/settings.json`):
-
-1. `npm --prefix frontend run build`
-2. Click **Go Live**
-
-For a smoother experience, use VS Code's **Terminal → Run Task** menu instead:
-- **Dev server (hot reload)**
-- **Run portfolio (build + preview)**
+**Live site:** _[add deployed URL here]_
 
 ---
 
-## Environment setup
+## Tech stack
 
-### Contact form (EmailJS)
+| Layer | Technology | Purpose |
+|---|---|---|
+| Framework | React 18 | Component architecture and state management |
+| Build tool | Vite | Fast dev server, optimized production bundling |
+| 3D rendering | Three.js | Interactive 3D scenes and visual elements |
+| Animation | Framer Motion | Declarative UI transitions and gesture-based animation |
+| Smooth scroll | Lenis | Physics-based inertial scrolling |
+| Styling | Tailwind CSS | Utility-first, responsive design system |
+| Contact | EmailJS | Serverless contact form submission, no backend required |
 
-```bash
-cp frontend/.env.example frontend/.env
-```
+---
 
-Then add your EmailJS service ID, template ID, and public key to `frontend/.env`.
-
-### Resume download
-
-Place your resume PDF at:
+## Project structure
